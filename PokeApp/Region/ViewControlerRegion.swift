@@ -43,7 +43,8 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate,UITableViewDelegat
         //consulta regiones
         self.viewModel.getRegion()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onllamarViewController(_:)), name: .didReceiveData, object: nil)
+        //observer
+        NotificationCenter.default.addObserver(self, selector: #selector(onllamarViewController(_:)), name: .llamarViewController, object: nil)
     }
     
     
@@ -73,6 +74,7 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate,UITableViewDelegat
         if let data = notification.object as? Result
         {
             //print("\(data.name) scored \(data.url) points!")
+            //pasar datos entre viewcontroller
             let selectionPoke = ViewControllerSelectionPoke.instantiate()
             selectionPoke.urlpokedex = data.url
             selectionPoke.nombreRegion = data.name
@@ -81,5 +83,6 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate,UITableViewDelegat
     }
 }
 extension Notification.Name {
+    //declarar nombre de notificacion
     static let llamarViewController = Notification.Name("llamarViewController")
 }

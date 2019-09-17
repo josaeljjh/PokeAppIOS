@@ -22,6 +22,7 @@ class ViewModelSelectionPoke{
     var item = [PokemonEntry]()
     var urlPokedex : String!
     var valid : Bool!
+    var spinner:JHSpinnerView!
     
     init(dataSource : GenericDataSource<PokemonEntry>?,url:String) {
         self.dataSource = dataSource
@@ -42,7 +43,7 @@ class ViewModelSelectionPoke{
                        self.getPokemon(self.region[0].pokedexes[0].url)
                     }else{
                 
-                    NotificationCenter.default.post(name: .didReceiveData, object: nil)
+                    NotificationCenter.default.post(name: .didReceiveError, object: nil)
                     }
                 }catch let JSON_error{
                     print("error",JSON_error)
@@ -69,6 +70,7 @@ class ViewModelSelectionPoke{
                     //for prueba in region{
                     //  self.dataSource?.data.value = prueba.results
                     //}
+                     NotificationCenter.default.post(name: .HideLoadig, object: nil)
                 }catch let JSON_error{
                     print("error",JSON_error)
                 }

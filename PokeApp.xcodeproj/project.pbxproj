@@ -11,6 +11,9 @@
 		3416EEC2232C54DE007D42F1 /* ViewControllerSelectionPoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416EEC1232C54DE007D42F1 /* ViewControllerSelectionPoke.swift */; };
 		3416EEC4232C5521007D42F1 /* ViewModelSelectionPoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416EEC3232C5521007D42F1 /* ViewModelSelectionPoke.swift */; };
 		3416EEC6232C55E4007D42F1 /* LeftAlignedIconEditt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416EEC5232C55E4007D42F1 /* LeftAlignedIconEditt.swift */; };
+		341C145F233182FF00D50D3C /* JNBBottombar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C145E233182FF00D50D3C /* JNBBottombar.swift */; };
+		341C146123318A3800D50D3C /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C146023318A3800D50D3C /* LoadingOverlay.swift */; };
+		341C146323318DE900D50D3C /* JHSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C146223318DE900D50D3C /* JHSpinnerView.swift */; };
 		346BC278232BED6000EF9ED1 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346BC277232BED6000EF9ED1 /* strings.swift */; };
 		3470F983232ABBA100DC32B3 /* ViewModelRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3470F982232ABBA100DC32B3 /* ViewModelRegion.swift */; };
 		3470F986232ABC5300DC32B3 /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3470F985232ABC5300DC32B3 /* GenericDataSource.swift */; };
@@ -43,6 +46,9 @@
 		3416EEC1232C54DE007D42F1 /* ViewControllerSelectionPoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSelectionPoke.swift; sourceTree = "<group>"; };
 		3416EEC3232C5521007D42F1 /* ViewModelSelectionPoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelSelectionPoke.swift; sourceTree = "<group>"; };
 		3416EEC5232C55E4007D42F1 /* LeftAlignedIconEditt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedIconEditt.swift; sourceTree = "<group>"; };
+		341C145E233182FF00D50D3C /* JNBBottombar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JNBBottombar.swift; sourceTree = "<group>"; };
+		341C146023318A3800D50D3C /* LoadingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
+		341C146223318DE900D50D3C /* JHSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHSpinnerView.swift; sourceTree = "<group>"; };
 		346BC277232BED6000EF9ED1 /* strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 		3470F982232ABBA100DC32B3 /* ViewModelRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelRegion.swift; sourceTree = "<group>"; };
 		3470F985232ABC5300DC32B3 /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 				346BC277232BED6000EF9ED1 /* strings.swift */,
 				3416EEBE232C4453007D42F1 /* Interface.swift */,
 				3416EEC5232C55E4007D42F1 /* LeftAlignedIconEditt.swift */,
+				341C145E233182FF00D50D3C /* JNBBottombar.swift */,
+				341C146023318A3800D50D3C /* LoadingOverlay.swift */,
+				341C146223318DE900D50D3C /* JHSpinnerView.swift */,
 			);
 			path = ControlCustom;
 			sourceTree = "<group>";
@@ -340,9 +349,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3470F992232ADFD100DC32B3 /* CardView.swift in Sources */,
+				341C146323318DE900D50D3C /* JHSpinnerView.swift in Sources */,
 				3470F990232ADE8C00DC32B3 /* TableViewCell.swift in Sources */,
 				349CF3E0232FFA5500B268CB /* PokedexModel.swift in Sources */,
 				34FB531A2322C0FC007BC0F1 /* LeftAlignedIconButton.swift in Sources */,
+				341C145F233182FF00D50D3C /* JNBBottombar.swift in Sources */,
 				3470F98E232ADD1200DC32B3 /* RegionModel.swift in Sources */,
 				349CF3DC232FF22700B268CB /* CollectionDataSource.swift in Sources */,
 				349CF3E42330265B00B268CB /* Name.swift in Sources */,
@@ -355,6 +366,7 @@
 				3470F98A232ABF2800DC32B3 /* TableDataSource.swift in Sources */,
 				3470F983232ABBA100DC32B3 /* ViewModelRegion.swift in Sources */,
 				3416EEC6232C55E4007D42F1 /* LeftAlignedIconEditt.swift in Sources */,
+				341C146123318A3800D50D3C /* LoadingOverlay.swift in Sources */,
 				3416EEBF232C4453007D42F1 /* Interface.swift in Sources */,
 				3416EEC4232C5521007D42F1 /* ViewModelSelectionPoke.swift in Sources */,
 				34FB53182322C0CC007BC0F1 /* GradientView.swift in Sources */,

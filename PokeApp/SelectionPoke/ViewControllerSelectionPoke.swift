@@ -17,7 +17,7 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
+    var spinner:JHSpinnerView!
     @IBOutlet weak var Titulo: UILabel!
     @IBOutlet weak var GridCollection: UICollectionView!
     
@@ -43,6 +43,11 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Loading
+        spinner = JHSpinnerView.showOnView(view, spinnerColor:#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), overlay:.custom(CGSize(width: 150, height: 130), 20), overlayColor:UIColor.black.withAlphaComponent(0.6), fullCycleTime:4.0, text:"Loading")
+        
+        view.addSubview(spinner)
         
         Titulo.text = "Región "+nombreRegion.capitalized
         //capturar tamaño de pantalla
@@ -70,10 +75,16 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
         //consulta regiones
         self.viewModel.getPokedex()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: nil)
+        ObserverNotification()
         
+        ShowSheet(strings.titulo,strings.reglas)
     }
     
+    func ObserverNotification() {
+        //observer ERROR
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveError(_:)), name: .didReceiveError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onHideLoadig(_:)), name: .HideLoadig, object: nil)
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -83,13 +94,24 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func onDidReceiveError(_ notification:Notification) {
+        //showToast(message: "Esta región no contiene pokémon")
+        JNBBottombar.shared.show(text: "Esta región no contiene pokémon.")
+        // Hide Loading
+        spinner.dismiss()
+    }
+    @objc func onHideLoadig(_ notification:Notification) {
+        // Hide Loading
+        spinner.dismiss()
+    }
     @objc func onDidReceiveData(_ notification:Notification) {
         showToast(message: "error mierda por fin")
     }
 }
 
 extension Notification.Name {
+    static let didReceiveError = Notification.Name("didReceiveError")
     static let didReceiveData = Notification.Name("didReceiveData")
-    static let didCompleteTask = Notification.Name("didCompleteTask")
-    static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
+    static let HideLoadig = Notification.Name("HideLoadig")
+
 }
