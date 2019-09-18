@@ -394,6 +394,9 @@
                                                                 <constraint firstAttribute="width" constant="60" id="ehW-ND-S7c"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeball" translatesAutoresizingMaskIntoConstraints="NO" id="8eh-5v-Ybs" userLabel="ImgBall">
+                                                            <rect key="frame" x="57" y="57" width="35" height="35"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -403,10 +406,14 @@
                                                         <constraint firstAttribute="height" constant="100" id="Af9-Y9-Qh1"/>
                                                         <constraint firstAttribute="trailing" secondItem="zhN-mY-v6t" secondAttribute="trailing" id="C7m-jq-FA5"/>
                                                         <constraint firstAttribute="width" constant="100" id="W5B-5G-TVf"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8eh-5v-Ybs" secondAttribute="bottom" constant="8" id="Y45-M7-EmH"/>
+                                                        <constraint firstItem="8eh-5v-Ybs" firstAttribute="leading" secondItem="wh9-Th-bQc" secondAttribute="leading" constant="57" id="Yrv-f1-3Pb"/>
                                                         <constraint firstAttribute="trailing" secondItem="bcQ-CX-ige" secondAttribute="trailing" constant="20" id="ZjJ-wM-2Hy"/>
                                                         <constraint firstItem="zhN-mY-v6t" firstAttribute="leading" secondItem="wh9-Th-bQc" secondAttribute="leading" id="gDf-9q-IkI"/>
+                                                        <constraint firstItem="8eh-5v-Ybs" firstAttribute="top" secondItem="wh9-Th-bQc" secondAttribute="top" constant="57" id="jUb-CX-HyM"/>
                                                         <constraint firstItem="bcQ-CX-ige" firstAttribute="leading" secondItem="wh9-Th-bQc" secondAttribute="leading" constant="20" id="kt9-Bs-7ME"/>
                                                         <constraint firstItem="bcQ-CX-ige" firstAttribute="top" secondItem="wh9-Th-bQc" secondAttribute="top" constant="15" id="oaB-x9-mxN"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8eh-5v-Ybs" secondAttribute="trailing" constant="8" id="sxh-Q0-Lgp"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -442,6 +449,8 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="ImgPoke" destination="bcQ-CX-ige" id="Kwx-i8-QPA"/>
+                                            <outlet property="cardView" destination="wh9-Th-bQc" id="7Bt-7Y-FsN"/>
+                                            <outlet property="imgBall" destination="8eh-5v-Ybs" id="iUy-iY-dMW"/>
                                             <outlet property="textPoke" destination="zhN-mY-v6t" id="Mc5-M8-t9O"/>
                                         </connections>
                                     </collectionViewCell>
@@ -484,6 +493,7 @@
         <image name="ic_pokeboloasArtboard 1" width="24" height="24"/>
         <image name="map" width="512" height="512"/>
         <image name="player" width="512" height="512"/>
+        <image name="pokeball" width="256" height="256"/>
         <image name="pokemon_icon" width="1024" height="466"/>
     </resources>
 </document>

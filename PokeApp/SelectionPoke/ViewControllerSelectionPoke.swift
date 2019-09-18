@@ -11,7 +11,7 @@ import UIKit
 import Nuke
 
 
-class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
+class ViewControllerSelectionPoke: UIViewController{
     
     var pipeline = ImagePipeline.shared
     var screenSize: CGRect!
@@ -24,7 +24,6 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
     var urlpokedex : String!
     var nombreRegion : String!
     let dataSource = CollectionDataSource()
-    
     /// funcion de instancia para controlador
     ///
     /// - Returns: ViewControllerRegion
@@ -63,8 +62,8 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
         layout.minimumLineSpacing = 0
         GridCollection!.collectionViewLayout = layout
         
-        //lista region
-        self.GridCollection.delegate = self
+        //lista pokemon
+        self.GridCollection.delegate = self.dataSource
         
         // Do any additional setup after loading the view.
         self.GridCollection.dataSource = self.dataSource
@@ -107,11 +106,4 @@ class ViewControllerSelectionPoke: UIViewController,UICollectionViewDelegate{
     @objc func onDidReceiveData(_ notification:Notification) {
         showToast(message: "error mierda por fin")
     }
-}
-
-extension Notification.Name {
-    static let didReceiveError = Notification.Name("didReceiveError")
-    static let didReceiveData = Notification.Name("didReceiveData")
-    static let HideLoadig = Notification.Name("HideLoadig")
-
 }

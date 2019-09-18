@@ -9,7 +9,11 @@
 import Foundation
 import Nuke
 
-class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDataSource{
+class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDataSource,UICollectionViewDelegate{
+    
+    var arrData = [String]() // This is your data array
+    var arrSelectedIndex = [IndexPath]() // This is selected cell Index array
+    var arrSelectedData = [String]() // This is selected cell data array
     
     var pipeline = ImagePipeline.shared
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,11 +36,46 @@ class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDat
         cell.textPoke.text = data.value[indexPath.row].pokemonSpecies.name.lowercased().capitalized
         loadImage(url, cell.ImgPoke)
         
+        if arrSelectedIndex.contains(indexPath) { // You need to check wether selected index array contain current index if yes then change the color
+            cell.cardView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            cell.imgBall.visibility = .visible
+        }
+        else {
+            cell.cardView.backgroundColor = UIColor.white
+            cell.imgBall.visibility = .invisible
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(data.value[indexPath.row].pokemonSpecies.name.lowercased().capitalized)
+        let strData = data.value[indexPath.row].pokemonSpecies.name
+        
+        if arrSelectedIndex.contains(indexPath) {
+            arrSelectedIndex = arrSelectedIndex.filter { $0 != indexPath}
+            arrSelectedData = arrSelectedData.filter { $0 != strData}
+        }
+        else {
+             if arrSelectedIndex.count <= 5 {
+                arrSelectedIndex.append(indexPath)
+                arrSelectedData.append(strData)
+                print("\(arrSelectedIndex.count)")
+             }else{
+                 print("solo puedes elegir 6 pokemon")
+            }
+           
+            
+            if arrSelectedIndex.count >= 3 {
+                if arrSelectedIndex.count <= 6 {
+                  print("Guardar")
+                }
+            }else{
+                print("No GUardar")
+            }
+        }
+        
+        collectionView.reloadData()
     }
     
     func loadImage(_ urlimg: URL?,_ image: UIImageView) {

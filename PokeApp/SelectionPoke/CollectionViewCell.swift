@@ -15,5 +15,7 @@ class CollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var textPoke: UILabel!
     @IBOutlet weak var ImgPoke: UIImageView!
+    @IBOutlet weak var cardView: CardView!
+    @IBOutlet weak var imgBall: UIImageView!
     
 }

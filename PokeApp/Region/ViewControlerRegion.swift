@@ -11,12 +11,11 @@ import UIKit
 import GoogleSignIn
 
 
-class ViewControllerRegion: UIViewController,UITabBarDelegate,UITableViewDelegate{
+class ViewControllerRegion: UIViewController,UITabBarDelegate{
     
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var listTable: UITableView!
     
-    static let shared = ViewControllerRegion()
     let dataSource = TableDataSource()
     
     lazy var viewModel : ViewModelRegion = {
@@ -81,8 +80,4 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate,UITableViewDelegat
             self.navigationController?.pushViewController(selectionPoke, animated: true)
         }
     }
-}
-extension Notification.Name {
-    //declarar nombre de notificacion
-    static let llamarViewController = Notification.Name("llamarViewController")
 }
