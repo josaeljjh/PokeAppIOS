@@ -11,11 +11,21 @@ import UIKit
 
 @IBDesignable
 class LeftAlignedIconButton: UIButton {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.shadowRadius = newValue
+            layer.masksToBounds = false
+        }
+    }
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
         let titleRect = super.titleRect(forContentRect: contentRect)
         let imageSize = currentImage?.size ?? .zero
         let availableWidth = contentRect.width - imageEdgeInsets.right - imageSize.width - titleRect.width
-            layer.cornerRadius  = frame.size.height/5
         return titleRect.offsetBy(dx: round(availableWidth / 2), dy: 0)
     }
 }

@@ -39,7 +39,6 @@ class ViewControllerSelectionPoke: UIViewController{
         return viewModel
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,12 +76,14 @@ class ViewControllerSelectionPoke: UIViewController{
         ObserverNotification()
         
         ShowSheet(strings.titulo,strings.reglas)
+       
     }
     
     func ObserverNotification() {
         //observer ERROR
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveError(_:)), name: .didReceiveError, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onHideLoadig(_:)), name: .HideLoadig, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -104,6 +105,33 @@ class ViewControllerSelectionPoke: UIViewController{
         spinner.dismiss()
     }
     @objc func onDidReceiveData(_ notification:Notification) {
-        showToast(message: "error mierda por fin")
+        if let data = notification.object as? PokemonEntry
+        {
+            SheetDetalle(data)
+        }
+    }
+    
+    func SheetDetalle(_ datos:PokemonEntry) {
+        let controller = ViewControllerDetalle.instantiate()
+        var sheetController = SheetViewController()
+        sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
+        // Adjust how the bottom safe area is handled on iPhone X screens
+        sheetController.blurBottomSafeArea = false
+        sheetController.adjustForBottomSafeArea = true
+        // Turn off rounded corners
+        sheetController.topCornersRadius = 0
+        // Make corners more round
+        sheetController.topCornersRadius = 15
+        // Disable the dismiss on background tap functionality
+        sheetController.dismissOnBackgroundTap = false
+        // Extend the background behind the pull bar instead of having it transparent
+        sheetController.extendBackgroundBehindHandle = true
+        // Change the overlay color
+        //sheetController.overlayColor = UIColor.red
+        // Change the handle color
+        sheetController.handleColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        controller.sheetControllerDetalle = sheetController
+        controller.datos = [datos]
+        self.present(sheetController, animated: true, completion: nil)
     }
 }

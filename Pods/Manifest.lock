@@ -44,6 +44,7 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
+  - FittedSheets (1.4.5)
   - GoogleAppMeasurement (6.1.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - Alamofire
   - Firebase/Auth
   - Firebase/Core
+  - FittedSheets
   - GoogleSignIn
   - Nuke
 
@@ -110,6 +112,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
     - FirebaseInstanceID
+    - FittedSheets
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -131,6 +134,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 4c04ae09d0ab027c30179828c6bb47764df1bd13
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
   FirebaseInstanceID: 8b42755db950682e7de0d167bc6fb26a57b244af
+  FittedSheets: 7f754c9f6fb4ea330cbc57c652b594255f2a6819
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
   GoogleDataTransport: 9c3d63ed82f882a9a74d4be67dd7ad01bf046102
   GoogleDataTransportCCTSupport: 6b545f7149111180763dc18c6f372c963de4a310
@@ -141,6 +145,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nuke: e6a65472f59c1bfe779cb495760951f0121ef7c0
 
-PODFILE CHECKSUM: 73ea2d072ee2df27f644c06e4debcd8e5899be83
+PODFILE CHECKSUM: c735bce6f5de4438fb46abd2e44a6f60a6329882
 
 COCOAPODS: 1.7.5

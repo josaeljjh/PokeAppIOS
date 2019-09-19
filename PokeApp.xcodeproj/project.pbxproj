@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34151B33233291D200933B6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34151B32233291D200933B6B /* GoogleService-Info.plist */; };
+		34151B352332DE8C00933B6B /* ViewControllerDetalle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34151B342332DE8C00933B6B /* ViewControllerDetalle.swift */; };
+		34151B372332E16200933B6B /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34151B362332E16200933B6B /* SheetViewController.swift */; };
+		34151B392332E21100933B6B /* SheetSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34151B382332E21100933B6B /* SheetSize.swift */; };
+		34151B3B2332E26000933B6B /* InitialTouchPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34151B3A2332E26000933B6B /* InitialTouchPanGestureRecognizer.swift */; };
+		34151B3D2332E2CD00933B6B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34151B3C2332E2CD00933B6B /* UIViewControllerExtension.swift */; };
+		34151B3F2332E34100933B6B /* Yalta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34151B3E2332E34100933B6B /* Yalta.swift */; };
 		3416EEBF232C4453007D42F1 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416EEBE232C4453007D42F1 /* Interface.swift */; };
 		3416EEC2232C54DE007D42F1 /* ViewControllerSelectionPoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416EEC1232C54DE007D42F1 /* ViewControllerSelectionPoke.swift */; };
 		3416EEC4232C5521007D42F1 /* ViewModelSelectionPoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416EEC3232C5521007D42F1 /* ViewModelSelectionPoke.swift */; };
@@ -36,12 +43,18 @@
 		34FB53152322BF34007BC0F1 /* ViewControllerLoginSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FB53142322BF34007BC0F1 /* ViewControllerLoginSocial.swift */; };
 		34FB53182322C0CC007BC0F1 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FB53172322C0CC007BC0F1 /* GradientView.swift */; };
 		34FB531A2322C0FC007BC0F1 /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FB53192322C0FC007BC0F1 /* LeftAlignedIconButton.swift */; };
-		34FB531C2322F3F7007BC0F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34FB531B2322F3F7007BC0F1 /* GoogleService-Info.plist */; };
 		34FB531F2322FD7B007BC0F1 /* ViewControlerRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FB531E2322FD7B007BC0F1 /* ViewControlerRegion.swift */; };
 		A7306FDDDFD93D4982EB969E /* Pods_PokeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFA15ADDAB262C1804D1A5D /* Pods_PokeApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34151B32233291D200933B6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		34151B342332DE8C00933B6B /* ViewControllerDetalle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDetalle.swift; sourceTree = "<group>"; };
+		34151B362332E16200933B6B /* SheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
+		34151B382332E21100933B6B /* SheetSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetSize.swift; sourceTree = "<group>"; };
+		34151B3A2332E26000933B6B /* InitialTouchPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTouchPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		34151B3C2332E2CD00933B6B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		34151B3E2332E34100933B6B /* Yalta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yalta.swift; sourceTree = "<group>"; };
 		3416EEBE232C4453007D42F1 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
 		3416EEC1232C54DE007D42F1 /* ViewControllerSelectionPoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSelectionPoke.swift; sourceTree = "<group>"; };
 		3416EEC3232C5521007D42F1 /* ViewModelSelectionPoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelSelectionPoke.swift; sourceTree = "<group>"; };
@@ -73,7 +86,6 @@
 		34FB53142322BF34007BC0F1 /* ViewControllerLoginSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLoginSocial.swift; sourceTree = "<group>"; };
 		34FB53172322C0CC007BC0F1 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		34FB53192322C0FC007BC0F1 /* LeftAlignedIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedIconButton.swift; sourceTree = "<group>"; };
-		34FB531B2322F3F7007BC0F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		34FB531E2322FD7B007BC0F1 /* ViewControlerRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControlerRegion.swift; sourceTree = "<group>"; };
 		7E249B1999D01C47AED2A285 /* Pods-PokeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokeApp.release.xcconfig"; path = "Target Support Files/Pods-PokeApp/Pods-PokeApp.release.xcconfig"; sourceTree = "<group>"; };
 		CAFA15ADDAB262C1804D1A5D /* Pods_PokeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,12 +104,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34151B402332E3CF00933B6B /* FittedSheets */ = {
+			isa = PBXGroup;
+			children = (
+				34151B362332E16200933B6B /* SheetViewController.swift */,
+				34151B382332E21100933B6B /* SheetSize.swift */,
+				34151B3A2332E26000933B6B /* InitialTouchPanGestureRecognizer.swift */,
+				34151B3C2332E2CD00933B6B /* UIViewControllerExtension.swift */,
+				34151B3E2332E34100933B6B /* Yalta.swift */,
+			);
+			path = FittedSheets;
+			sourceTree = "<group>";
+		};
 		3416EEC0232C549E007D42F1 /* SelectionPoke */ = {
 			isa = PBXGroup;
 			children = (
 				3416EEC1232C54DE007D42F1 /* ViewControllerSelectionPoke.swift */,
 				349CF3DB232FF22700B268CB /* CollectionDataSource.swift */,
 				349CF3DD232FF24500B268CB /* CollectionViewCell.swift */,
+				34151B342332DE8C00933B6B /* ViewControllerDetalle.swift */,
 			);
 			path = SelectionPoke;
 			sourceTree = "<group>";
@@ -156,7 +181,7 @@
 				34FB53052322BED2007BC0F1 /* Main.storyboard */,
 				34FB53082322BED3007BC0F1 /* Assets.xcassets */,
 				34FB530A2322BED3007BC0F1 /* LaunchScreen.storyboard */,
-				34FB531B2322F3F7007BC0F1 /* GoogleService-Info.plist */,
+				34151B32233291D200933B6B /* GoogleService-Info.plist */,
 				34FB530D2322BED3007BC0F1 /* Info.plist */,
 			);
 			path = PokeApp;
@@ -183,6 +208,7 @@
 				341C145E233182FF00D50D3C /* JNBBottombar.swift */,
 				341C146023318A3800D50D3C /* LoadingOverlay.swift */,
 				341C146223318DE900D50D3C /* JHSpinnerView.swift */,
+				34151B402332E3CF00933B6B /* FittedSheets */,
 			);
 			path = ControlCustom;
 			sourceTree = "<group>";
@@ -276,7 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34FB530C2322BED3007BC0F1 /* LaunchScreen.storyboard in Resources */,
-				34FB531C2322F3F7007BC0F1 /* GoogleService-Info.plist in Resources */,
+				34151B33233291D200933B6B /* GoogleService-Info.plist in Resources */,
 				34FB53092322BED3007BC0F1 /* Assets.xcassets in Resources */,
 				34FB53072322BED2007BC0F1 /* Main.storyboard in Resources */,
 			);
@@ -349,15 +375,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				3470F992232ADFD100DC32B3 /* CardView.swift in Sources */,
+				34151B3B2332E26000933B6B /* InitialTouchPanGestureRecognizer.swift in Sources */,
+				34151B372332E16200933B6B /* SheetViewController.swift in Sources */,
 				341C146323318DE900D50D3C /* JHSpinnerView.swift in Sources */,
 				3470F990232ADE8C00DC32B3 /* TableViewCell.swift in Sources */,
+				34151B392332E21100933B6B /* SheetSize.swift in Sources */,
 				349CF3E0232FFA5500B268CB /* PokedexModel.swift in Sources */,
+				34151B3F2332E34100933B6B /* Yalta.swift in Sources */,
 				34FB531A2322C0FC007BC0F1 /* LeftAlignedIconButton.swift in Sources */,
 				341C145F233182FF00D50D3C /* JNBBottombar.swift in Sources */,
 				3470F98E232ADD1200DC32B3 /* RegionModel.swift in Sources */,
 				349CF3DC232FF22700B268CB /* CollectionDataSource.swift in Sources */,
+				34151B352332DE8C00933B6B /* ViewControllerDetalle.swift in Sources */,
 				349CF3E42330265B00B268CB /* Name.swift in Sources */,
 				34FB531F2322FD7B007BC0F1 /* ViewControlerRegion.swift in Sources */,
+				34151B3D2332E2CD00933B6B /* UIViewControllerExtension.swift in Sources */,
 				349CF3E2233002CF00B268CB /* PokemonModel.swift in Sources */,
 				34CABF4323299765004C2D0A /* Extension.swift in Sources */,
 				34FB53042322BED2007BC0F1 /* ViewController.swift in Sources */,

@@ -57,18 +57,20 @@ class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDat
             arrSelectedData = arrSelectedData.filter { $0 != strData}
         }
         else {
-             if arrSelectedIndex.count <= 5 {
+            if arrSelectedIndex.count <= 5 {
                 arrSelectedIndex.append(indexPath)
                 arrSelectedData.append(strData)
                 print("\(arrSelectedIndex.count)")
-             }else{
-                 print("solo puedes elegir 6 pokemon")
+                let datos = data.value[indexPath.item]
+                NotificationCenter.default.post(name: .didReceiveData, object: datos)
+            }else{
+                print("solo puedes elegir 6 pokemon")
             }
-           
+            
             
             if arrSelectedIndex.count >= 3 {
                 if arrSelectedIndex.count <= 6 {
-                  print("Guardar")
+                    print("Guardar")
                 }
             }else{
                 print("No GUardar")

@@ -31,5 +31,4 @@ class TableDataSource : GenericDataSource<Result>, UITableViewDataSource,UITable
         let datos = data.value[indexPath.item]
         NotificationCenter.default.post(name: .llamarViewController, object: datos)
     }
-    
 }
