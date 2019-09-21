@@ -27,6 +27,11 @@ class TableDataSource : GenericDataSource<Result>, UITableViewDataSource,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print(data.value[indexPath.item].name.capitalized)
+
+        //Limpiar array
+        Globales.arrData = []
+        Globales.arrSelectedIndex = []
+        Globales.arrSelectedData = []
         //notificar datos a la vista
         let datos = data.value[indexPath.item]
         NotificationCenter.default.post(name: .llamarViewController, object: datos)

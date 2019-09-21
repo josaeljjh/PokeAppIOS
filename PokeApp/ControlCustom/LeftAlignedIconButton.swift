@@ -18,7 +18,34 @@ class LeftAlignedIconButton: UIButton {
         }
         set {
             layer.cornerRadius = newValue
+            layer.masksToBounds = false
+        }
+    }
+    @IBInspectable var shadowRadius: CGFloat {
+        get {
+            return layer.shadowRadius
+        }
+        set {
             layer.shadowRadius = newValue
+            layer.masksToBounds = false
+        }
+    }
+    @IBInspectable var shadowOpacity: Float {
+        get {
+            return layer.shadowOpacity
+        }
+        set {
+            layer.shadowOpacity = newValue
+            layer.shadowColor = UIColor.darkGray.cgColor
+        }
+    }
+    @IBInspectable var shadowOffset: CGSize {
+        get {
+            return layer.shadowOffset
+        }
+        set {
+            layer.shadowOffset = newValue
+            layer.shadowColor = UIColor.black.cgColor
             layer.masksToBounds = false
         }
     }

@@ -128,5 +128,5 @@ extension Notification.Name {
     static let didReceiveError = Notification.Name("didReceiveError")
     static let didReceiveData = Notification.Name("didReceiveData")
     static let HideLoadig = Notification.Name("HideLoadig")
-
+    static let didBtnSave = Notification.Name("didBtnSave")
 }

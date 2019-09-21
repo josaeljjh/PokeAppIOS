@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Nuke
+import FittedSheets
 
 
 class ViewControllerSelectionPoke: UIViewController{
@@ -20,6 +21,7 @@ class ViewControllerSelectionPoke: UIViewController{
     var spinner:JHSpinnerView!
     @IBOutlet weak var Titulo: UILabel!
     @IBOutlet weak var GridCollection: UICollectionView!
+    @IBOutlet weak var btnFloaty: LeftAlignedIconButton!
     
     var urlpokedex : String!
     var nombreRegion : String!
@@ -42,6 +44,9 @@ class ViewControllerSelectionPoke: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //ocultar botom save
+        btnFloaty.visibility = .gone
+        
         // Loading
         spinner = JHSpinnerView.showOnView(view, spinnerColor:#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), overlay:.custom(CGSize(width: 150, height: 130), 20), overlayColor:UIColor.black.withAlphaComponent(0.6), fullCycleTime:4.0, text:"Loading")
         
@@ -55,8 +60,8 @@ class ViewControllerSelectionPoke: UIViewController{
         
         // Do any additional setup after loading the view, typically from a nib.
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 1, left: 0, bottom: 10, right: 0)
-        layout.itemSize = CGSize(width: screenWidth/3, height: screenWidth/3)
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 8, bottom: 10, right: 8)
+        layout.itemSize = CGSize(width: (screenWidth/3) - 6, height: screenWidth/3)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         GridCollection!.collectionViewLayout = layout
@@ -76,7 +81,7 @@ class ViewControllerSelectionPoke: UIViewController{
         ObserverNotification()
         
         ShowSheet(strings.titulo,strings.reglas)
-       
+        
     }
     
     func ObserverNotification() {
@@ -84,6 +89,7 @@ class ViewControllerSelectionPoke: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveError(_:)), name: .didReceiveError, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onHideLoadig(_:)), name: .HideLoadig, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidBtnSave(_:)), name: .didBtnSave, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -95,23 +101,27 @@ class ViewControllerSelectionPoke: UIViewController{
     }
     
     @objc func onDidReceiveError(_ notification:Notification) {
-        //showToast(message: "Esta región no contiene pokémon")
-        JNBBottombar.shared.show(text: "Esta región no contiene pokémon.")
+        guard let mensaje = notification.userInfo?["msj"] as? String else { return }
+        JNBBottombar.shared.show(text: mensaje)
         // Hide Loading
         spinner.dismiss()
+        NotificationCenter.default.removeObserver(onDidReceiveError)
     }
     @objc func onHideLoadig(_ notification:Notification) {
         // Hide Loading
         spinner.dismiss()
+        NotificationCenter.default.removeObserver(onHideLoadig)
     }
     @objc func onDidReceiveData(_ notification:Notification) {
         if let data = notification.object as? PokemonEntry
         {
-            SheetDetalle(data)
+            guard let indexPath = notification.userInfo?["indexPath"] as? Int else { return }
+            SheetDetalle(data,indexPath)
         }
+        NotificationCenter.default.removeObserver(onDidReceiveData)
     }
     
-    func SheetDetalle(_ datos:PokemonEntry) {
+    func SheetDetalle(_ datos:PokemonEntry,_ indexPath:Int) {
         let controller = ViewControllerDetalle.instantiate()
         var sheetController = SheetViewController()
         sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
@@ -132,6 +142,26 @@ class ViewControllerSelectionPoke: UIViewController{
         sheetController.handleColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         controller.sheetControllerDetalle = sheetController
         controller.datos = [datos]
+        controller.GridCollection = self.GridCollection
+        controller.position = indexPath
         self.present(sheetController, animated: true, completion: nil)
     }
+    
+    @objc func onDidBtnSave(_ notification:Notification) {
+        if Globales.arrSelectedIndex.count >= 3 {
+            if Globales.arrSelectedIndex.count <= 6 {
+                print("Guardar")
+                btnFloaty.visibility = .visible
+            }
+        }else{
+               btnFloaty.visibility = .gone
+               print("No GUardar")
+        }
+        //NotificationCenter.default.removeObserver(onDidBtnSave)
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        
+    }
+    
 }

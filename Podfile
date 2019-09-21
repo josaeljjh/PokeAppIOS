@@ -9,4 +9,5 @@ target 'PokeApp' do
   pod 'Firebase/Auth'
   pod 'Nuke'
   pod 'Alamofire'
+  pod 'FittedSheets'
 end

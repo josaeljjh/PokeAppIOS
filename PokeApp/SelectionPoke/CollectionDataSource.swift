@@ -11,10 +11,6 @@ import Nuke
 
 class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDataSource,UICollectionViewDelegate{
     
-    var arrData = [String]() // This is your data array
-    var arrSelectedIndex = [IndexPath]() // This is selected cell Index array
-    var arrSelectedData = [String]() // This is selected cell data array
-    
     var pipeline = ImagePipeline.shared
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.value.count
@@ -36,7 +32,7 @@ class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDat
         cell.textPoke.text = data.value[indexPath.row].pokemonSpecies.name.lowercased().capitalized
         loadImage(url, cell.ImgPoke)
         
-        if arrSelectedIndex.contains(indexPath) { // You need to check wether selected index array contain current index if yes then change the color
+        if Globales.arrSelectedIndex.contains(indexPath) { // You need to check wether selected index array contain current index if yes then change the color
             cell.cardView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             cell.imgBall.visibility = .visible
         }
@@ -50,30 +46,21 @@ class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(data.value[indexPath.row].pokemonSpecies.name.lowercased().capitalized)
-        let strData = data.value[indexPath.row].pokemonSpecies.name
+        let strData = data.value[indexPath.row].pokemonSpecies.name.capitalized
         
-        if arrSelectedIndex.contains(indexPath) {
-            arrSelectedIndex = arrSelectedIndex.filter { $0 != indexPath}
-            arrSelectedData = arrSelectedData.filter { $0 != strData}
+        if Globales.arrSelectedIndex.contains(indexPath) {
+            Globales.arrSelectedIndex = Globales.arrSelectedIndex.filter { $0 != indexPath}
+            Globales.arrSelectedData = Globales.arrSelectedData.filter { $0 != strData}
+            NotificationCenter.default.post(name: .didBtnSave, object: nil)
         }
         else {
-            if arrSelectedIndex.count <= 5 {
-                arrSelectedIndex.append(indexPath)
-                arrSelectedData.append(strData)
-                print("\(arrSelectedIndex.count)")
+            if Globales.arrSelectedIndex.count <= 5 {
                 let datos = data.value[indexPath.item]
-                NotificationCenter.default.post(name: .didReceiveData, object: datos)
+                let Info = [ "indexPath" : indexPath.row ]
+                NotificationCenter.default.post(name: .didReceiveData, object: datos,userInfo: Info)
             }else{
-                print("solo puedes elegir 6 pokemon")
-            }
-            
-            
-            if arrSelectedIndex.count >= 3 {
-                if arrSelectedIndex.count <= 6 {
-                    print("Guardar")
-                }
-            }else{
-                print("No GUardar")
+                let mensaje = [ "msj" : "El maximo de pokémon para tu equipo es de 6." ]
+                NotificationCenter.default.post(name: .didReceiveError, object: nil, userInfo: mensaje)
             }
         }
         

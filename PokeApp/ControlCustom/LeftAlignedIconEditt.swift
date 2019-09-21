@@ -12,6 +12,38 @@ import UIKit
 @IBDesignable
 class LeftAlignedIconEditt: UITextField {
     
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.shadowRadius = newValue
+            layer.masksToBounds = false
+        }
+    }
+    
+    @IBInspectable var shadowOpacity: Float {
+        get {
+            return layer.shadowOpacity
+        }
+        set {
+            layer.shadowOpacity = newValue
+            layer.shadowColor = UIColor.darkGray.cgColor
+        }
+    }
+    
+    @IBInspectable var shadowOffset: CGSize {
+        get {
+            return layer.shadowOffset
+        }
+        set {
+            layer.shadowOffset = newValue
+            layer.shadowColor = UIColor.black.cgColor
+            layer.masksToBounds = false
+        }
+    }
+    
     // Provides left padding for images
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         var textRect = super.leftViewRect(forBounds: bounds)
@@ -27,7 +59,7 @@ class LeftAlignedIconEditt: UITextField {
     
     @IBInspectable var leftPadding: CGFloat = 0
     
-    @IBInspectable var color: UIColor = UIColor.lightGray {
+    @IBInspectable var color: UIColor = UIColor.black {
         didSet {
             updateView()
         }

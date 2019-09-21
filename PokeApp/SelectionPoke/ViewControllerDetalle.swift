@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Nuke
+import FittedSheets
 
 class ViewControllerDetalle: UIViewController{
     
@@ -17,6 +18,9 @@ class ViewControllerDetalle: UIViewController{
     @IBOutlet weak var numero: UILabel!
     @IBOutlet weak var tipo: UILabel!
     @IBOutlet weak var region: UILabel!
+    var GridCollection: UICollectionView!
+    var position:Int = 0
+    var strData:String!
     var pipeline = ImagePipeline.shared
     
     var sheetControllerDetalle: SheetViewController = SheetViewController()
@@ -33,7 +37,7 @@ class ViewControllerDetalle: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nombre.text = datos[0].pokemonSpecies.name
+        nombre.text = datos[0].pokemonSpecies.name.capitalized
         numero.text = "\(datos[0].entryNumber)"
         
         //obtener imagen pokemon
@@ -48,12 +52,30 @@ class ViewControllerDetalle: UIViewController{
         
     }
     
+    func seleccionPoke() {
+        strData = datos[0].pokemonSpecies.name.capitalized
+        let indexPath = IndexPath(row: position, section: 0)
+        
+        if Globales.arrSelectedIndex.count <= 5 {
+            Globales.arrSelectedIndex.append(indexPath)
+            Globales.arrSelectedData.append(strData)
+            print("\(Globales.arrSelectedIndex.count)")
+            
+        }else{
+            JNBBottombar.shared.show(text: "El maximo de pokémon para tu equipo es de 6.")
+        }
+        
+        GridCollection.reloadData()
+    }
+    
     @IBAction func cerrar(_ sender: Any) {
         sheetControllerDetalle.closeSheet()
     }
     
     @IBAction func agregar(_ sender: Any) {
-        
+        sheetControllerDetalle.closeSheet()
+        seleccionPoke()
+        NotificationCenter.default.post(name: .didBtnSave, object: nil)
     }
     func loadImage(_ urlimg: URL?,_ image: UIImageView) {
         

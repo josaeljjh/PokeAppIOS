@@ -42,8 +42,8 @@ class ViewModelSelectionPoke{
                     if(!self.region[0].pokedexes.isEmpty){
                        self.getPokemon(self.region[0].pokedexes[0].url)
                     }else{
-                
-                    NotificationCenter.default.post(name: .didReceiveError, object: nil)
+                    let mensaje = [ "msj" : "Esta región no contiene pokémon." ]
+                    NotificationCenter.default.post(name: .didReceiveError, object: nil, userInfo: mensaje)
                     }
                 }catch let JSON_error{
                     print("error",JSON_error)
