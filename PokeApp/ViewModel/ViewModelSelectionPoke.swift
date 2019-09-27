@@ -20,9 +20,9 @@ class ViewModelSelectionPoke{
     var region = [PokedexModel]()
     var pokemon = [PokemonModel]()
     var item = [PokemonEntry]()
+    var detalle = [PokemonDetalle]()
     var urlPokedex : String!
     var valid : Bool!
-    var spinner:JHSpinnerView!
     
     init(dataSource : GenericDataSource<PokemonEntry>?,url:String) {
         self.dataSource = dataSource
@@ -80,6 +80,27 @@ class ViewModelSelectionPoke{
         }
     }
     
-
+    func getDetalle(_ urlPoke: String, _ indexPath: Int) {
+        //url
+        let url = URL(string:urlPoke)
+        //descarga de datos
+        Alamofire.request(url!).responseJSON { (response) in
+            switch response.result{
+            case .success:
+                do{
+                    //self.heroes =  try JSONDecoder().decode([Hero].self, from: response.data!)
+                    self.detalle = [try JSONDecoder().decode(PokemonDetalle.self, from: response.data!)]
+                    
+                   // NotificationCenter.default.post(name: .HideLoadig, object: nil)
+                    let Info = [ "indexPath" : indexPath ]
+                    NotificationCenter.default.post(name: .didReceiveDetalle, object: self.detalle[0],userInfo: Info)
+                }catch let JSON_error{
+                    print("error",JSON_error)
+                }
+            case.failure(let error):
+                print(error)
+            }
+        }
+    }
     
 }

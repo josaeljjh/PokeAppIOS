@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import MaterialShowcase
+import FittedSheets
 
 extension UIViewController {
     
@@ -72,6 +74,68 @@ extension UIViewController {
             // ...
         }
     }
+    
+    func SheetDetalle(_ datos:PokemonDetalle,_ indexPath:Int,_ GridCollection:UICollectionView,_ nombreRegion:String) {
+        let controller = ViewControllerDetalle.instantiate()
+        var sheetController = SheetViewController()
+        sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
+        // Adjust how the bottom safe area is handled on iPhone X screens
+        sheetController.blurBottomSafeArea = false
+        sheetController.adjustForBottomSafeArea = true
+        // Turn off rounded corners
+        sheetController.topCornersRadius = 0
+        // Make corners more round
+        sheetController.topCornersRadius = 15
+        // Disable the dismiss on background tap functionality
+        sheetController.dismissOnBackgroundTap = false
+        // Extend the background behind the pull bar instead of having it transparent
+        sheetController.extendBackgroundBehindHandle = true
+        // Change the overlay color
+        //sheetController.overlayColor = UIColor.red
+        // Change the handle color
+        sheetController.handleColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        controller.sheetControllerDetalle = sheetController
+        controller.datos = [datos]
+        controller.GridCollection = GridCollection
+        controller.position = indexPath
+        controller.textRegion = nombreRegion
+        self.present(sheetController, animated: true, completion: nil)
+    }
+    
+    
+    func ShowHelp(_ vista:UIView,_ titulo:String,_ descripcion:String,_ radio:CGFloat) {
+          let showcase = MaterialShowcase()
+          // Target
+          showcase.targetTintColor = UIColor.blue
+          showcase.targetHolderRadius = radio
+          showcase.targetHolderColor = UIColor.clear
+          showcase.setTargetView(view: vista) // always required to set targetView
+          showcase.primaryText = titulo
+          showcase.secondaryText = descripcion
+          // Background
+          showcase.backgroundPromptColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+          showcase.backgroundPromptColorAlpha = 0.96
+          showcase.backgroundViewType = .circle // default is .circle
+          
+          // Text
+          showcase.primaryTextColor = UIColor.white
+          showcase.secondaryTextColor = UIColor.white
+          showcase.primaryTextFont = UIFont.boldSystemFont(ofSize: 20)
+          showcase.secondaryTextFont = UIFont.systemFont(ofSize: 15)
+          //Alignment
+          showcase.primaryTextAlignment = .left
+          showcase.secondaryTextAlignment = .left
+          // Animation
+          showcase.aniComeInDuration = 0.5 // unit: second
+          showcase.aniGoOutDuration = 0.5 // unit: second
+          showcase.aniRippleScale = 1.5
+          showcase.aniRippleColor = UIColor.white
+          showcase.aniRippleAlpha = 0.2
+          showcase.show(completion: {
+              // You can save showcase state here
+              // Later you can check and do not show it again
+          })
+      }
 }
 
 extension UIView {
@@ -122,6 +186,16 @@ extension UIView {
     }
 }
 
+extension Sequence {
+    public func toDictionary<Key: Hashable>(with selectKey: (Iterator.Element) -> Key) -> [Key:Iterator.Element] {
+        var dict: [Key:Iterator.Element] = [:]
+        for element in self {
+            dict[selectKey(element)] = element
+        }
+        return dict
+    }
+}
+
 extension Notification.Name {
     //declarar nombre de notificacion
     static let llamarViewController = Notification.Name("llamarViewController")
@@ -129,4 +203,5 @@ extension Notification.Name {
     static let didReceiveData = Notification.Name("didReceiveData")
     static let HideLoadig = Notification.Name("HideLoadig")
     static let didBtnSave = Notification.Name("didBtnSave")
+    static let didReceiveDetalle = Notification.Name("didReceiveDetalle")
 }

@@ -21,10 +21,13 @@ class ViewControllerDetalle: UIViewController{
     var GridCollection: UICollectionView!
     var position:Int = 0
     var strData:String!
+    var textRegion:String!
+    var url:URL!
+    var imgUrl:String!
     var pipeline = ImagePipeline.shared
     
     var sheetControllerDetalle: SheetViewController = SheetViewController()
-    var datos = [PokemonEntry]()
+    var datos = [PokemonDetalle]()
     /// - Returns: ViewControllerRegion
     static func instantiate() -> ViewControllerDetalle {
         // swiftlint:disable force_cast
@@ -37,29 +40,31 @@ class ViewControllerDetalle: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nombre.text = datos[0].pokemonSpecies.name.capitalized
-        numero.text = "\(datos[0].entryNumber)"
+        nombre.text = datos[0].name.capitalized
+        numero.text = "\(datos[0].id)"
         
         //obtener imagen pokemon
         let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-        var img = datos[0].pokemonSpecies.url
-        img = img.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon-species/", with: "")
-        img = img.replacingOccurrences(of: "/", with: "")+".png"
-        img = urlPoke+img
+        imgUrl = "\(datos[0].id)"
+        //img = img.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon-species/", with: "")
+        imgUrl = imgUrl.replacingOccurrences(of: "/", with: "")+".png"
+        imgUrl = urlPoke+imgUrl
         
-        let url = URL(string:img)
+        url = URL(string:imgUrl)
         loadImage(url, imgPokemon)
+        tipo.text = datos[0].eggGroups[0].name.capitalized
+        region.text = textRegion.capitalized
         
     }
     
     func seleccionPoke() {
-        strData = datos[0].pokemonSpecies.name.capitalized
+        strData = datos[0].name.capitalized
         let indexPath = IndexPath(row: position, section: 0)
         
         if Globales.arrSelectedIndex.count <= 5 {
             Globales.arrSelectedIndex.append(indexPath)
             Globales.arrSelectedData.append(strData)
-            print("\(Globales.arrSelectedIndex.count)")
+            //print("\(Globales.arrSelectedIndex.count)")
             
         }else{
             JNBBottombar.shared.show(text: "El maximo de pokémon para tu equipo es de 6.")
@@ -76,6 +81,17 @@ class ViewControllerDetalle: UIViewController{
         sheetControllerDetalle.closeSheet()
         seleccionPoke()
         NotificationCenter.default.post(name: .didBtnSave, object: nil)
+        let equipo = Pokemon(
+                        id: "\(position)",
+                        numero: "\(datos[0].id)",
+                        nombre: datos[0].name.capitalized,
+                        imagen: imgUrl,
+                        tipo: datos[0].eggGroups[0].name.capitalized,
+                        region: textRegion.capitalized
+                        )
+            Globales.equipoPokemon.append(equipo)
+            print("conteo: \(Globales.equipoPokemon.count)")
+        // self.equipoPokemon.append(   id: "\(datos[0].id)",nombre: datos[0].name.capitalized,listPokemon:pokemon)
     }
     func loadImage(_ urlimg: URL?,_ image: UIImageView) {
         

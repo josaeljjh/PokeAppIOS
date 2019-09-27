@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import Nuke
 import FittedSheets
+import Firebase
+import FirebaseDatabase
 
 
 class ViewControllerSelectionPoke: UIViewController{
@@ -22,6 +24,8 @@ class ViewControllerSelectionPoke: UIViewController{
     @IBOutlet weak var Titulo: UILabel!
     @IBOutlet weak var GridCollection: UICollectionView!
     @IBOutlet weak var btnFloaty: LeftAlignedIconButton!
+    @IBOutlet weak var edittEquipo: LeftAlignedIconEditt!
+    @IBOutlet weak var btnAtras: UIButton!
     
     var urlpokedex : String!
     var nombreRegion : String!
@@ -45,7 +49,7 @@ class ViewControllerSelectionPoke: UIViewController{
         super.viewDidLoad()
         
         //ocultar botom save
-        btnFloaty.visibility = .gone
+        btnFloaty.visibility = .invisible
         
         // Loading
         spinner = JHSpinnerView.showOnView(view, spinnerColor:#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), overlay:.custom(CGSize(width: 150, height: 130), 20), overlayColor:UIColor.black.withAlphaComponent(0.6), fullCycleTime:4.0, text:"Loading")
@@ -90,6 +94,7 @@ class ViewControllerSelectionPoke: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(onHideLoadig(_:)), name: .HideLoadig, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidBtnSave(_:)), name: .didBtnSave, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveDetalle(_:)), name: .didReceiveDetalle, object: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -116,52 +121,71 @@ class ViewControllerSelectionPoke: UIViewController{
         if let data = notification.object as? PokemonEntry
         {
             guard let indexPath = notification.userInfo?["indexPath"] as? Int else { return }
-            SheetDetalle(data,indexPath)
+            self.viewModel.getDetalle(data.pokemonSpecies.url,indexPath)
+            
         }
         NotificationCenter.default.removeObserver(onDidReceiveData)
     }
     
-    func SheetDetalle(_ datos:PokemonEntry,_ indexPath:Int) {
-        let controller = ViewControllerDetalle.instantiate()
-        var sheetController = SheetViewController()
-        sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
-        // Adjust how the bottom safe area is handled on iPhone X screens
-        sheetController.blurBottomSafeArea = false
-        sheetController.adjustForBottomSafeArea = true
-        // Turn off rounded corners
-        sheetController.topCornersRadius = 0
-        // Make corners more round
-        sheetController.topCornersRadius = 15
-        // Disable the dismiss on background tap functionality
-        sheetController.dismissOnBackgroundTap = false
-        // Extend the background behind the pull bar instead of having it transparent
-        sheetController.extendBackgroundBehindHandle = true
-        // Change the overlay color
-        //sheetController.overlayColor = UIColor.red
-        // Change the handle color
-        sheetController.handleColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
-        controller.sheetControllerDetalle = sheetController
-        controller.datos = [datos]
-        controller.GridCollection = self.GridCollection
-        controller.position = indexPath
-        self.present(sheetController, animated: true, completion: nil)
+    @objc func onDidReceiveDetalle(_ notification:Notification) {
+        if let detalle = notification.object as? PokemonDetalle
+        {
+            guard let indexPath = notification.userInfo?["indexPath"] as? Int else { return }
+            SheetDetalle(detalle,indexPath,self.GridCollection,nombreRegion)
+            
+        }
+        NotificationCenter.default.removeObserver(onDidReceiveDetalle)
     }
+    
     
     @objc func onDidBtnSave(_ notification:Notification) {
         if Globales.arrSelectedIndex.count >= 3 {
             if Globales.arrSelectedIndex.count <= 6 {
                 print("Guardar")
                 btnFloaty.visibility = .visible
+                if Globales.arrSelectedIndex.count == 3 {
+                    ShowHelp(btnFloaty,strings.tituloGuardar,strings.reglasGuardar,50)
+                }
             }
         }else{
-               btnFloaty.visibility = .gone
-               print("No GUardar")
+            btnFloaty.visibility = .invisible
+            print("No GUardar")
         }
-        //NotificationCenter.default.removeObserver(onDidBtnSave)
+        NotificationCenter.default.removeObserver(onDidBtnSave)
     }
     
     @IBAction func save(_ sender: Any) {
-        
+        GuardarEquipo(true)
     }
     
+    func GuardarEquipo(_ validar:Bool) {
+        if edittEquipo.text!.isEmpty{
+            //showToast(message: "vacio")
+            //JNBBottombar.shared.show(text: strings.nombreEquipo)
+            ShowHelp(edittEquipo,strings.tituloEquipo,strings.nombreEquipo,60)
+        }else{
+            var dbRef: DatabaseReference!
+            dbRef = Database.database().reference()
+            if validar {
+                var arrayPoke = Array<[String:String]>()
+                for poke in Globales.equipoPokemon{
+                    let pokemon = ["id": poke.id,"numero":poke.numero,"nombre":poke.nombre,"imagen":poke.imagen,"tipo":poke.tipo,"region":poke.region]
+                    arrayPoke.append(pokemon)
+                }
+                //crear
+                let id = dbRef.childByAutoId().key ?? ""
+                //let id = Auth.auth().currentUser?.uid
+                let equipo = [
+                    "id": id,
+                    "nombre": edittEquipo.text! as String,
+                    "listPokemon": arrayPoke
+                    ] as [String : Any]
+                
+                dbRef.child("Equipos").child(id).setValue(equipo)
+                //let userID = Auth.auth().currentUser?.uid
+                //dataBaseReference.child("users").child(userID!).setValue(["username": "JosaelH"])
+            }
+            JNBBottombar.shared.show(text: "Equipo Agregado")
+        }
+    }
 }

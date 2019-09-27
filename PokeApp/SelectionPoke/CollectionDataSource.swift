@@ -45,13 +45,20 @@ class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(data.value[indexPath.row].pokemonSpecies.name.lowercased().capitalized)
+        //print(data.value[indexPath.row].pokemonSpecies.name.lowercased().capitalized)
         let strData = data.value[indexPath.row].pokemonSpecies.name.capitalized
+        let eliminar:String = data.value[indexPath.row].pokemonSpecies.name.capitalized
         
         if Globales.arrSelectedIndex.contains(indexPath) {
             Globales.arrSelectedIndex = Globales.arrSelectedIndex.filter { $0 != indexPath}
             Globales.arrSelectedData = Globales.arrSelectedData.filter { $0 != strData}
             NotificationCenter.default.post(name: .didBtnSave, object: nil)
+            
+            for (index, item) in Globales.equipoPokemon.enumerated() {
+                if item.nombre.contains("\(eliminar)"){
+                    Globales.equipoPokemon.remove(at:index)
+                }
+            }
         }
         else {
             if Globales.arrSelectedIndex.count <= 5 {
