@@ -8,6 +8,7 @@ target 'PokeApp' do
   pod 'GoogleSignIn'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Analytics'
   pod 'Nuke'
   pod 'Alamofire'
   pod 'FittedSheets'

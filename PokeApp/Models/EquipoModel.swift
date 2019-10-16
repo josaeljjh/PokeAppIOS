@@ -8,37 +8,31 @@
 
 import Foundation
 
-class EquipoModel: NSObject{
-    let id: String
+struct EquipoModel: Codable {
+    let idEquipo: String
     let nombre: String
-    let listPokemon: [Pokemon]
-    
-    init(id: String, nombre: String,listPokemon: [Pokemon]) {
-        self.id = id
-        self.nombre = nombre
-        self.listPokemon = listPokemon
-    }
+    let listPokemon: [ListPokemon]
 }
-
-class Pokemon: NSObject{
-    var id: String
-    var numero: String
-    var nombre: String
-    var imagen: String
-    var tipo: String
-    var region: String
+struct ListPokemon: Codable {
+       let id: String
+       let imagen: String
+       let nombre: String
+       let numero: String
+       let region: String
+       let tipo: String
     
-     init(id: String,
-         numero: String,
-         nombre: String,
-         imagen: String,
-         tipo: String,
-         region: String) {
-        self.id = id
-        self.numero = numero
-        self.nombre = nombre
-        self.imagen = imagen
-        self.tipo = tipo
-        self.region = region
-    }
-}
+    init(id: String,
+            imagen: String,
+            nombre: String,
+            numero: String,
+            region: String,
+            tipo: String) {
+           self.id = id
+           self.imagen = imagen
+           self.nombre = nombre
+           self.numero = numero
+           self.region = region
+           self.tipo = tipo
+         
+       }
+   }

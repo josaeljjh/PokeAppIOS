@@ -34,6 +34,9 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
         self.tabBar.delegate = self
         self.tabBar.selectedItem = self.tabBar.items![0]
         
+        //for second tab
+        //(self.tabBar.items![1]).badgeValue = " "
+        
         // Do any additional setup after loading the view.
         self.listTable.dataSource = self.dataSource
         self.dataSource.data.addAndNotify(observer: self) { [weak self] in
@@ -60,9 +63,13 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
         else if(item.tag == 1) {
             // second tab bar code
             showToast(message: "2")
+            
+            let nextViewController = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(withIdentifier: "Equipos") as! ViewControllerEquiposPokemon
+            self.navigationController?.pushViewController(nextViewController, animated:true)
+            
         }else if(item.tag == 2) {
             // second tab bar code
-            showToast(message: "3")
+            //showToast(message: "3")
             GIDSignIn.sharedInstance()?.signOut()
             let nextViewController = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(withIdentifier: "Login") as! ViewControllerLoginSocial
             self.navigationController?.pushViewController(nextViewController, animated:true)

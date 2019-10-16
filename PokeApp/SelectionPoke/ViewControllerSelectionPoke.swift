@@ -16,7 +16,6 @@ import FirebaseDatabase
 
 class ViewControllerSelectionPoke: UIViewController{
     
-    var pipeline = ImagePipeline.shared
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
@@ -167,16 +166,16 @@ class ViewControllerSelectionPoke: UIViewController{
             var dbRef: DatabaseReference!
             dbRef = Database.database().reference()
             if validar {
-                var arrayPoke = Array<[String:String]>()
+                var arrayPoke = Array<[String:Any]>()
                 for poke in Globales.equipoPokemon{
-                    let pokemon = ["id": poke.id,"numero":poke.numero,"nombre":poke.nombre,"imagen":poke.imagen,"tipo":poke.tipo,"region":poke.region]
+                    let pokemon = ["id": poke.id,"numero":poke.numero,"nombre":poke.nombre,"imagen":poke.imagen,"tipo":poke.tipo,"region":poke.region] as [String : Any]
                     arrayPoke.append(pokemon)
                 }
                 //crear
                 let id = dbRef.childByAutoId().key ?? ""
                 //let id = Auth.auth().currentUser?.uid
                 let equipo = [
-                    "id": id,
+                    "idEquipo": id,
                     "nombre": edittEquipo.text! as String,
                     "listPokemon": arrayPoke
                     ] as [String : Any]

@@ -10,12 +10,14 @@ import Foundation
 import UIKit
 import GoogleSignIn
 import Firebase
+import FirebaseAnalytics
 
 class ViewControllerLoginSocial: UIViewController,GIDSignInDelegate {
     
     var fullName: String = ""
     var email: String = ""
     
+   
     @IBOutlet weak var btnGoogle: LeftAlignedIconButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,12 @@ class ViewControllerLoginSocial: UIViewController,GIDSignInDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    @IBAction func btnFaceBook(_ sender: Any) {
+       // Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+       //     AnalyticsParameterItemID: "my_item_id"
+       // ])
+       }
     @IBAction func loginGoogle(_ sender: Any) {
         GIDSignIn.sharedInstance()?.signOut()
         GIDSignIn.sharedInstance()?.presentingViewController = self

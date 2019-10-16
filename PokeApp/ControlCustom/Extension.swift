@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MaterialShowcase
 import FittedSheets
+import Nuke
 
 extension UIViewController {
     
@@ -135,6 +136,25 @@ extension UIViewController {
               // You can save showcase state here
               // Later you can check and do not show it again
           })
+      }
+    
+    func loadImage(_ urlimg: URL?,_ image: UIImageView) {
+          let pipeline = ImagePipeline.shared
+          let screenWidth = UIScreen.main.bounds.size.width / 3
+          let targetSize = CGSize(width: screenWidth, height: (screenWidth * 2 / 3))
+          
+          let request = ImageRequest(
+              url: urlimg!,
+              processors: [
+                  ImageProcessor.Resize(size: targetSize),
+                  ImageProcessor.Circle()
+              ]
+          )
+          
+          var options = ImageLoadingOptions(transition: .fadeIn(duration: 0.5))
+          options.pipeline = pipeline
+          
+          Nuke.loadImage(with: request, options: options, into:image)
       }
 }
 

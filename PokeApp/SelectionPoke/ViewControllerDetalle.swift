@@ -93,21 +93,5 @@ class ViewControllerDetalle: UIViewController{
             print("conteo: \(Globales.equipoPokemon.count)")
         // self.equipoPokemon.append(   id: "\(datos[0].id)",nombre: datos[0].name.capitalized,listPokemon:pokemon)
     }
-    func loadImage(_ urlimg: URL?,_ image: UIImageView) {
-        
-        let screenWidth = UIScreen.main.bounds.size.width / 3
-        let targetSize = CGSize(width: screenWidth, height: (screenWidth * 2 / 3))
-        
-        let request = ImageRequest(
-            url: urlimg!,
-            processors: [
-                ImageProcessor.Resize(size: targetSize)
-            ]
-        )
-        
-        var options = ImageLoadingOptions(transition: .fadeIn(duration: 0.5))
-        options.pipeline = pipeline
-        
-        Nuke.loadImage(with: request, options: options, into:image)
-    }
+
 }

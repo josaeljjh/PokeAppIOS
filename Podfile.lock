@@ -5,6 +5,8 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.2.0)
   - AppAuth/Core (1.2.0)
   - AppAuth/ExternalUserAgent (1.2.0)
+  - Firebase/Analytics (6.8.1):
+    - Firebase/Core
   - Firebase/Auth (6.8.1):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.2.3)
@@ -103,6 +105,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -162,6 +165,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nuke: e6a65472f59c1bfe779cb495760951f0121ef7c0
 
-PODFILE CHECKSUM: eb89ddc0c5a6b2be1e0e6912ea0208506e5dab9c
+PODFILE CHECKSUM: bc89d300b3d5b6751e04661fb2e8c7281625aa27
 
 COCOAPODS: 1.7.5
