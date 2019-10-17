@@ -12,6 +12,11 @@ import GoogleSignIn
 
 class TableDataSource : GenericDataSource<Result>, UITableViewDataSource,UITableViewDelegate  {
     
+    lazy var controller : ViewControllerRegion = {
+          let controller = ViewControllerRegion()
+          return controller
+      }()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.value.count
     }
@@ -35,5 +40,6 @@ class TableDataSource : GenericDataSource<Result>, UITableViewDataSource,UITable
         //notificar datos a la vista
         let datos = data.value[indexPath.item]
         NotificationCenter.default.post(name: .llamarViewController, object: datos)
+        //self.controller.llamar()
     }
 }

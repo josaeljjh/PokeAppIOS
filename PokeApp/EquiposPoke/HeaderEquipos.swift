@@ -5,9 +5,6 @@
 //  Created by Josael Hernandez on 10/14/19.
 //  Copyright © 2019 Josael Hernandez. All rights reserved.
 //
-
-import Foundation
-import Foundation
 import UIKit
 
 class HeaderEquipos: UITableViewCell{

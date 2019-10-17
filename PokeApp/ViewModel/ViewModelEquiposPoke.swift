@@ -39,6 +39,7 @@ class ViewModelEquiposPoke{
                         self.equipos.append(data)
                         self.dataSource?.data.value = self.equipos
                         
+                        NotificationCenter.default.post(name: .HideLoadig, object: nil)
                     } catch let error {
                         print("error firebase: ",error)
                     }

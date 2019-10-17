@@ -185,6 +185,7 @@ class ViewControllerSelectionPoke: UIViewController{
                 //dataBaseReference.child("users").child(userID!).setValue(["username": "JosaelH"])
             }
             JNBBottombar.shared.show(text: "Equipo Agregado")
+            starViewController("Equipos")
         }
     }
 }

@@ -1,8 +1,8 @@
 //
-//  ViewControllerDetalle.swift
+//  ViewControllerDetalleEquipo.swift
 //  PokeApp
 //
-//  Created by Josael Hernandez on 9/18/19.
+//  Created by Josael Hernandez on 10/17/19.
 //  Copyright © 2019 Josael Hernandez. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 import Nuke
 import FittedSheets
 
-class ViewControllerDetalle: UIViewController{
+class ViewControllerDetalleEquipo: UIViewController{
     
     @IBOutlet weak var imgPokemon: UIImageView!
     @IBOutlet weak var nombre: UILabel!
@@ -19,18 +19,15 @@ class ViewControllerDetalle: UIViewController{
     @IBOutlet weak var tipo: UILabel!
     @IBOutlet weak var region: UILabel!
     var GridCollection: UICollectionView!
-    @IBOutlet weak var btnAgregar: UIButton!
     var position:Int = 0
     var strData:String!
     var textRegion:String!
     var url:URL!
     var imgUrl:String!
     var pipeline = ImagePipeline.shared
-    var valid = true
     
     var sheetControllerDetalle: SheetViewController = SheetViewController()
     var datos = [PokemonDetalle]()
-    var equipo = [ListPokemon]()
     /// - Returns: ViewControllerRegion
     static func instantiate() -> ViewControllerDetalle {
         // swiftlint:disable force_cast
@@ -43,32 +40,21 @@ class ViewControllerDetalle: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nombre.text = datos[0].name.capitalized
+        numero.text = "\(datos[0].id)"
         
-        if(valid){
-            nombre.text = datos[0].name.capitalized
-            numero.text = "\(datos[0].id)"
-            
-            //obtener imagen pokemon
-            let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-            imgUrl = "\(datos[0].id)"
-            //img = img.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon-species/", with: "")
-            imgUrl = imgUrl.replacingOccurrences(of: "/", with: "")+".png"
-            imgUrl = urlPoke+imgUrl
-            
-            url = URL(string:imgUrl)
-            loadImage(url, imgPokemon)
-            tipo.text = datos[0].eggGroups[0].name.capitalized
-            region.text = textRegion.capitalized
-        }else{
-            btnAgregar.visibility = .invisible
-            
-            nombre.text = equipo[0].nombre.capitalized
-            numero.text = equipo[0].numero
-            url = URL(string:equipo[0].imagen)
-            loadImage(url, imgPokemon)
-            tipo.text = equipo[0].tipo.capitalized
-            region.text = equipo[0].region.capitalized
-        }
+        //obtener imagen pokemon
+        let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        imgUrl = "\(datos[0].id)"
+        //img = img.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon-species/", with: "")
+        imgUrl = imgUrl.replacingOccurrences(of: "/", with: "")+".png"
+        imgUrl = urlPoke+imgUrl
+        
+        url = URL(string:imgUrl)
+        loadImage(url, imgPokemon)
+        tipo.text = datos[0].eggGroups[0].name.capitalized
+        region.text = textRegion.capitalized
+        
     }
     
     func seleccionPoke() {
@@ -96,16 +82,17 @@ class ViewControllerDetalle: UIViewController{
         seleccionPoke()
         NotificationCenter.default.post(name: .didBtnSave, object: nil)
         let equipo = Pokemon(
-            id: "\(position)",
-            numero: "\(datos[0].id)",
-            nombre: datos[0].name.capitalized,
-            imagen: imgUrl,
-            tipo: datos[0].eggGroups[0].name.capitalized,
-            region: textRegion.capitalized
-        )
-        Globales.equipoPokemon.append(equipo)
-        print("conteo: \(Globales.equipoPokemon.count)")
+                        id: "\(position)",
+                        numero: "\(datos[0].id)",
+                        nombre: datos[0].name.capitalized,
+                        imagen: imgUrl,
+                        tipo: datos[0].eggGroups[0].name.capitalized,
+                        region: textRegion.capitalized
+                        )
+            Globales.equipoPokemon.append(equipo)
+            print("conteo: \(Globales.equipoPokemon.count)")
         // self.equipoPokemon.append(   id: "\(datos[0].id)",nombre: datos[0].name.capitalized,listPokemon:pokemon)
     }
-    
+
 }
+

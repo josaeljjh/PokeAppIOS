@@ -5,31 +5,14 @@
 //  Created by Josael Hernandez on 9/27/19.
 //  Copyright © 2019 Josael Hernandez. All rights reserved.
 //
-
-import Foundation
-//
-//  CurrencyDataSource.swift
-//  PokeApp
-//
-//  Created by Josael Hernandez on 9/12/19.
-//  Copyright © 2019 Josael Hernandez. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import GoogleSignIn
 
-class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,UITableViewDelegate  {
-    
-    var dataList = CollectionDataList()
+class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,UITableViewDelegate {
+
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
-    lazy var viewModel : ViewModelEquiposList = {
-        let viewModel = ViewModelEquiposList(dataSource: dataList)
-        return viewModel
-    }()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -39,8 +22,9 @@ class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,
         return data.value.count
     }
     
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-           let header = tableView.dequeueReusableCell(withIdentifier: "headerEquipos") as! HeaderEquipos
+        let header = tableView.dequeueReusableCell(withIdentifier: "headerEquipos") as! HeaderEquipos
         return header.bounds.height 
     }
     
@@ -49,16 +33,19 @@ class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,
         let header = tableView.dequeueReusableCell(withIdentifier: "headerEquipos") as! HeaderEquipos
         //header.textTitulo.text = "hola perros"
         header.setup(model: titulo)
+        header.imgOption.addTapClick{
+            //self.controller.getDetalle()
+            //NotificationCenter.default.post(name: .didDetalleEquipo, object: nil)
+        }
+        
         return header.contentView
     }
     
-   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! CellEquipos
-        
-        self.viewModel.data = data.value[indexPath.section].listPokemon
-        configurarCollection(cell)
-        
+        configurarCollection(cell, forRow: indexPath.section)
+        //setCollectionViewDataSourceDelegate(cell, forRow: indexPath.row)
         return cell
     }
     
@@ -67,7 +54,7 @@ class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,
         //print(data.value[indexPath.item].name.capitalized)
     }
     
-    func configurarCollection(_ cell:CellEquipos){
+    func configurarCollection(_ cell:CellEquipos, forRow section: Int) {
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -82,12 +69,14 @@ class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,
         layout.scrollDirection = .horizontal
         cell.collectionList.collectionViewLayout = layout
         
-        //lista Equipos
-        cell.collectionList.delegate = self.dataList
+        cell.collectionList.delegate = cell
+        cell.collectionList.dataSource = cell
+        cell.lista = data.value[section].listPokemon
+
+        cell.collectionList.reloadData()
         
-        // Do any additional setup after loading the view.
-        cell.collectionList.dataSource = self.dataList
-        //consulta regiones
-        self.viewModel.getList()
+     
     }
+    
+    
 }

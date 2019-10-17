@@ -13,4 +13,8 @@ class CellListEquipos: UICollectionViewCell{
     @IBOutlet weak var imgPokeE: UIImageView!
     @IBOutlet weak var textPokeE: UILabel!
     
+    
+    func setup(model: ListPokemon) {
+        textPokeE.text = model.nombre
+    }
 }

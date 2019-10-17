@@ -63,16 +63,13 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
         else if(item.tag == 1) {
             // second tab bar code
             showToast(message: "2")
-            
-            let nextViewController = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(withIdentifier: "Equipos") as! ViewControllerEquiposPokemon
-            self.navigationController?.pushViewController(nextViewController, animated:true)
+            starViewController("Equipos")
             
         }else if(item.tag == 2) {
             // second tab bar code
             //showToast(message: "3")
             GIDSignIn.sharedInstance()?.signOut()
-            let nextViewController = UIStoryboard(name: "Main",bundle: nil).instantiateViewController(withIdentifier: "Login") as! ViewControllerLoginSocial
-            self.navigationController?.pushViewController(nextViewController, animated:true)
+            starViewController("Login")
         }
     }
     
@@ -86,5 +83,11 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
             selectionPoke.nombreRegion = data.name
             self.navigationController?.pushViewController(selectionPoke, animated: true)
         }
+        
+        NotificationCenter.default.removeObserver(onllamarViewController)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBar.selectedItem = self.tabBar.items![0]
     }
 }
