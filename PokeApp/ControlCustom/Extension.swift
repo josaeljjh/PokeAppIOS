@@ -103,7 +103,7 @@ extension UIViewController {
         self.present(sheetController, animated: true, completion: nil)
     }
     
-    func SheetDetalleEquipo(_ datos:ListPokemon) {
+    func SheetDetalleEquipo(_ datos:Pokemon) {
         let controller = ViewControllerDetalle.instantiate()
         var sheetController = SheetViewController()
         sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
@@ -127,6 +127,31 @@ extension UIViewController {
         //controller.textRegion = nombreRegion
         controller.valid = false
         controller.equipo = [datos]
+        self.present(sheetController, animated: true, completion: nil)
+    }
+    
+    func SheetOption(_ datos:EquipoModel,_ listaEquipos:UITableView) {
+        let controller = ViewControllerOption.instantiate()
+        var sheetController = SheetViewController()
+        sheetController = SheetViewController(controller: controller, sizes: [ .fixed(260)])
+        // Adjust how the bottom safe area is handled on iPhone X screens
+        sheetController.blurBottomSafeArea = false
+        sheetController.adjustForBottomSafeArea = true
+        // Turn off rounded corners
+        sheetController.topCornersRadius = 0
+        // Make corners more round
+        sheetController.topCornersRadius = 15
+        // Disable the dismiss on background tap functionality
+        sheetController.dismissOnBackgroundTap = false
+        // Extend the background behind the pull bar instead of having it transparent
+        sheetController.extendBackgroundBehindHandle = true
+        // Change the overlay color
+        //sheetController.overlayColor = UIColor.red
+        // Change the handle color
+        sheetController.handleColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+        controller.sheetControllerOption = sheetController
+        controller.mEquipoModel = [datos]
+        controller.listaPoke = listaEquipos
         self.present(sheetController, animated: true, completion: nil)
     }
     
@@ -189,6 +214,13 @@ extension UIViewController {
             self.navigationController?.pushViewController(nextViewController, animated:true)
         }
     }
+    
+    func Loading() -> JHSpinnerView{
+        // Loading
+        let spinner = JHSpinnerView.showOnView(view, spinnerColor:#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), overlay:.custom(CGSize(width: 150, height: 130), 20), overlayColor:UIColor.black.withAlphaComponent(0.6), fullCycleTime:4.0, text:"Loading")
+        return spinner
+    }
+    
 }
 
 extension UINavigationController {
@@ -296,6 +328,25 @@ extension Sequence {
     }
 }
 
+extension UITextField {
+    func isError(baseColor: CGColor, numberOfShakes shakes: Float, revert: Bool) {
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "shadowColor")
+        animation.fromValue = baseColor
+        animation.toValue = UIColor.red.cgColor
+        animation.duration = 0.4
+        if revert { animation.autoreverses = true } else { animation.autoreverses = false }
+        self.layer.add(animation, forKey: "")
+        
+        let shake: CABasicAnimation = CABasicAnimation(keyPath: "position")
+        shake.duration = 0.07
+        shake.repeatCount = shakes
+        if revert { shake.autoreverses = true  } else { shake.autoreverses = false }
+        shake.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
+        shake.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
+        self.layer.add(shake, forKey: "position")
+    }
+}
+
 extension Notification.Name {
     //declarar nombre de notificacion
     static let llamarViewController = Notification.Name("llamarViewController")
@@ -305,4 +356,6 @@ extension Notification.Name {
     static let didBtnSave = Notification.Name("didBtnSave")
     static let didReceiveDetalle = Notification.Name("didReceiveDetalle")
     static let didDetalleEquipo = Notification.Name("didDetalleEquipo")
+    static let didOption = Notification.Name("didOption")
+    static let didUpdate = Notification.Name("didUpdate")
 }

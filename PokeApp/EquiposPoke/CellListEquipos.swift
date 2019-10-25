@@ -14,7 +14,7 @@ class CellListEquipos: UICollectionViewCell{
     @IBOutlet weak var textPokeE: UILabel!
     
     
-    func setup(model: ListPokemon) {
+    func setup(model: Pokemon) {
         textPokeE.text = model.nombre
     }
 }

@@ -102,6 +102,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Nuke (8.0.1)
+  - TKFormTextField (0.3.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -113,9 +114,10 @@ DEPENDENCIES:
   - GoogleSignIn
   - MaterialShowcase
   - Nuke
+  - TKFormTextField
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AppAuth
     - Firebase
@@ -139,6 +141,8 @@ SPEC REPOS:
     - MaterialShowcase
     - nanopb
     - Nuke
+  trunk:
+    - TKFormTextField
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -164,7 +168,8 @@ SPEC CHECKSUMS:
   MaterialShowcase: 6209b47731e87855cbd19d6a1b04f38672fd3440
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nuke: e6a65472f59c1bfe779cb495760951f0121ef7c0
+  TKFormTextField: def6294d3d3bd944d864ee48d5cc6e36863d6ade
 
-PODFILE CHECKSUM: bc89d300b3d5b6751e04661fb2e8c7281625aa27
+PODFILE CHECKSUM: 4384d7549e42ee3b78046c05b6771d782c04d9e1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

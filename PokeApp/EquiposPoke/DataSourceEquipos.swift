@@ -35,7 +35,7 @@ class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,
         header.setup(model: titulo)
         header.imgOption.addTapClick{
             //self.controller.getDetalle()
-            //NotificationCenter.default.post(name: .didDetalleEquipo, object: nil)
+            NotificationCenter.default.post(name: .didOption, object: titulo)
         }
         
         return header.contentView
@@ -74,7 +74,6 @@ class DataSourceEquipos : GenericDataSource<EquipoModel>, UITableViewDataSource,
         cell.lista = data.value[section].listPokemon
 
         cell.collectionList.reloadData()
-        
      
     }
     

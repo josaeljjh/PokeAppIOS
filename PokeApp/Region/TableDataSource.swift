@@ -37,6 +37,7 @@ class TableDataSource : GenericDataSource<Result>, UITableViewDataSource,UITable
         Globales.arrData = []
         Globales.arrSelectedIndex = []
         Globales.arrSelectedData = []
+        Globales.equipoPokemon = []
         //notificar datos a la vista
         let datos = data.value[indexPath.item]
         NotificationCenter.default.post(name: .llamarViewController, object: datos)

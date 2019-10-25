@@ -30,8 +30,8 @@ class ViewControllerDetalle: UIViewController{
     
     var sheetControllerDetalle: SheetViewController = SheetViewController()
     var datos = [PokemonDetalle]()
-    var equipo = [ListPokemon]()
-    /// - Returns: ViewControllerRegion
+    var equipo = [Pokemon]()
+    /// - Returns: ViewController
     static func instantiate() -> ViewControllerDetalle {
         // swiftlint:disable force_cast
         return UIStoryboard(name: "Main",

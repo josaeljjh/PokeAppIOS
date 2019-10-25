@@ -76,7 +76,6 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
     @objc func onllamarViewController(_ notification:Notification) {
         if let data = notification.object as? Result
         {
-            //print("\(data.name) scored \(data.url) points!")
             //pasar datos entre viewcontroller
             let selectionPoke = ViewControllerSelectionPoke.instantiate()
             selectionPoke.urlpokedex = data.url

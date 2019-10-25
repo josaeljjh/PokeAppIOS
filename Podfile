@@ -13,4 +13,5 @@ target 'PokeApp' do
   pod 'Alamofire'
   pod 'FittedSheets'
   pod 'MaterialShowcase'
+  pod "TKFormTextField"
 end

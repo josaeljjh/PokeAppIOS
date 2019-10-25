@@ -19,16 +19,20 @@ class ViewControllerSelectionPoke: UIViewController{
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    var spinner:JHSpinnerView!
     @IBOutlet weak var Titulo: UILabel!
     @IBOutlet weak var GridCollection: UICollectionView!
     @IBOutlet weak var btnFloaty: LeftAlignedIconButton!
     @IBOutlet weak var edittEquipo: LeftAlignedIconEditt!
     @IBOutlet weak var btnAtras: UIButton!
-    
+    var spinner : JHSpinnerView!
     var urlpokedex : String!
     var nombreRegion : String!
     let dataSource = CollectionDataSource()
+    var validar = false
+    var mEquipoModel = [EquipoModel]()
+    var id = ""
+    var msj = ""
+    var nombreEquipo = ""
     /// funcion de instancia para controlador
     ///
     /// - Returns: ViewControllerRegion
@@ -49,10 +53,11 @@ class ViewControllerSelectionPoke: UIViewController{
         
         //ocultar botom save
         btnFloaty.visibility = .invisible
+        //Nombre equipo
+        edittEquipo.text = nombreEquipo
         
         // Loading
-        spinner = JHSpinnerView.showOnView(view, spinnerColor:#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), overlay:.custom(CGSize(width: 150, height: 130), 20), overlayColor:UIColor.black.withAlphaComponent(0.6), fullCycleTime:4.0, text:"Loading")
-        
+        spinner = Loading()
         view.addSubview(spinner)
         
         Titulo.text = "Región "+nombreRegion.capitalized
@@ -101,7 +106,7 @@ class ViewControllerSelectionPoke: UIViewController{
         
     }
     @IBAction func btnBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popToViewController(ofClass: ViewControllerRegion.self)
     }
     
     @objc func onDidReceiveError(_ notification:Notification) {
@@ -154,10 +159,10 @@ class ViewControllerSelectionPoke: UIViewController{
     }
     
     @IBAction func save(_ sender: Any) {
-        GuardarEquipo(true)
+        GuardarEquipo()
     }
     
-    func GuardarEquipo(_ validar:Bool) {
+    func GuardarEquipo() {
         if edittEquipo.text!.isEmpty{
             //showToast(message: "vacio")
             //JNBBottombar.shared.show(text: strings.nombreEquipo)
@@ -165,27 +170,36 @@ class ViewControllerSelectionPoke: UIViewController{
         }else{
             var dbRef: DatabaseReference!
             dbRef = Database.database().reference()
-            if validar {
-                var arrayPoke = Array<[String:Any]>()
-                for poke in Globales.equipoPokemon{
-                    let pokemon = ["id": poke.id,"numero":poke.numero,"nombre":poke.nombre,"imagen":poke.imagen,"tipo":poke.tipo,"region":poke.region] as [String : Any]
-                    arrayPoke.append(pokemon)
-                }
-                //crear
-                let id = dbRef.childByAutoId().key ?? ""
-                //let id = Auth.auth().currentUser?.uid
-                let equipo = [
-                    "idEquipo": id,
-                    "nombre": edittEquipo.text! as String,
-                    "listPokemon": arrayPoke
-                    ] as [String : Any]
-                
-                dbRef.child("Equipos").child(id).setValue(equipo)
-                //let userID = Auth.auth().currentUser?.uid
-                //dataBaseReference.child("users").child(userID!).setValue(["username": "JosaelH"])
+            if !validar {
+                id = dbRef.childByAutoId().key ?? ""
+                msj = "Equipo Agregado"
+            }else{
+                id = mEquipoModel[0].idEquipo
+                msj = "Equipo Editado"
             }
-            JNBBottombar.shared.show(text: "Equipo Agregado")
+            var arrayPoke = Array<[String:Any]>()
+            for poke in Globales.equipoPokemon{
+                let pokemon = ["id": poke.id,"numero":poke.numero,"nombre":poke.nombre,"imagen":poke.imagen,"tipo":poke.tipo,"region":poke.region] as [String : Any]
+                arrayPoke.append(pokemon)
+            }
+            //crear
+            //let id = dbRef.childByAutoId().key ?? ""
+            //let id = Auth.auth().currentUser?.uid
+            let equipo = [
+                "idEquipo": id,
+                "nombre": edittEquipo.text! as String,
+                "urlRegion": urlpokedex as String,
+                "region": nombreRegion as String,
+                "listPokemon": arrayPoke
+                ] as [String : Any]
+            
+            dbRef.child("Equipos").child(id).setValue(equipo)
+            //let userID = Auth.auth().currentUser?.uid
+            //dataBaseReference.child("users").child(userID!).setValue(["username": "JosaelH"])
+            
+            JNBBottombar.shared.show(text: msj)
             starViewController("Equipos")
+            //navigationController?.popToViewController(ofClass: ViewControllerEquiposPokemon.self)
         }
     }
 }

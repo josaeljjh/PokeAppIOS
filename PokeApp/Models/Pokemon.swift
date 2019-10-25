@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Pokemon: Codable{
+struct Pokemon: Codable {
     var id: String
     var numero: String
     var nombre: String

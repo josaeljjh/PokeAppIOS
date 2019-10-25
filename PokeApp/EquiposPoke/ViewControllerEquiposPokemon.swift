@@ -12,11 +12,11 @@ import UIKit
 
 class ViewControllerEquiposPokemon: UIViewController{
     
+    @IBOutlet weak var imgFondo: UIImageView!
     @IBOutlet weak var listaEquipos: UITableView!
     @IBOutlet weak var tituloEquipos: UILabel!
-    var spinner:JHSpinnerView!
     let dataSource = DataSourceEquipos()
-    
+    var spinner : JHSpinnerView!
     lazy var viewModel : ViewModelEquiposPoke = {
         let viewModel = ViewModelEquiposPoke(dataSource: dataSource)
         return viewModel
@@ -25,22 +25,12 @@ class ViewControllerEquiposPokemon: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
-        
+        imgFondo.visibility = .invisible
         // Loading
-        spinner = JHSpinnerView.showOnView(view, spinnerColor:#colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1), overlay:.custom(CGSize(width: 150, height: 130), 20), overlayColor:UIColor.black.withAlphaComponent(0.6), fullCycleTime:4.0, text:"Loading")
-        
+        spinner = Loading()
         view.addSubview(spinner)
         
-        //lista Equipos
-        self.listaEquipos.delegate = self.dataSource
-        
-        // Do any additional setup after loading the view.
-        self.listaEquipos.dataSource = self.dataSource
-        self.dataSource.data.addAndNotify(observer: self) { [weak self] in
-            self?.listaEquipos.reloadData()
-        }
-        //consulta regiones
-        self.viewModel.getEquipos()
+        UpdateData()
         
         ObserverNotification()
     }
@@ -49,9 +39,13 @@ class ViewControllerEquiposPokemon: UIViewController{
         //observer 
         NotificationCenter.default.addObserver(self, selector: #selector(onDidDetalleEquipo), name: .didDetalleEquipo, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onHideLoadig(_:)), name: .HideLoadig, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onOption(_:)), name: .didOption, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdate(_:)), name: .didUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveError(_:)), name: .didReceiveError, object: nil)
     }
+    
     @objc func onDidDetalleEquipo(_ notification:Notification) {
-        if let data = notification.object as? ListPokemon
+        if let data = notification.object as? Pokemon
         {
             SheetDetalleEquipo(data)
         }
@@ -63,6 +57,29 @@ class ViewControllerEquiposPokemon: UIViewController{
         spinner.dismiss()
         NotificationCenter.default.removeObserver(onHideLoadig)
     }
+    @objc func onOption(_ notification:Notification) {
+        if let data = notification.object as? EquipoModel
+        {
+            SheetOption(data,listaEquipos)
+        }
+        NotificationCenter.default.removeObserver(onOption)
+        
+    }
+    @objc func onUpdate(_ notification:Notification) {
+        //editar equipos
+        if let data = notification.object as? EquipoModel
+        {
+            //pasar datos entre viewcontroller
+            let selectionPoke = ViewControllerSelectionPoke.instantiate()
+            selectionPoke.urlpokedex = data.urlRegion
+            selectionPoke.nombreRegion = data.region
+            selectionPoke.nombreEquipo = data.nombre
+            selectionPoke.validar = true
+            selectionPoke.mEquipoModel = [data]
+            self.navigationController?.pushViewController(selectionPoke, animated: true)
+        }
+        NotificationCenter.default.removeObserver(onUpdate)
+    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -72,5 +89,31 @@ class ViewControllerEquiposPokemon: UIViewController{
         //self.navigationController?.popToRootViewController(animated: true)
         //InicialViewController("Region")
         navigationController?.popToViewController(ofClass: ViewControllerRegion.self)
+    }
+    
+    @objc func onDidReceiveError(_ notification:Notification) {
+        guard let mensaje = notification.userInfo?["msj"] as? String else { return }
+        JNBBottombar.shared.show(text: mensaje)
+        // Hide Loading
+        spinner.dismiss()
+        imgFondo.visibility = .visible
+        NotificationCenter.default.removeObserver(onDidReceiveError)
+    }
+    
+    func UpdateData(){
+        //lista Equipos
+        self.listaEquipos.delegate = self.dataSource
+        
+        // Do any additional setup after loading the view.
+        self.listaEquipos.dataSource = self.dataSource
+        self.dataSource.data.addAndNotify(observer: self) { [weak self] in
+            self?.listaEquipos.reloadData()
+        }
+        //consulta equipos
+        self.viewModel.getEquipos()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
     }
 }

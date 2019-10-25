@@ -68,7 +68,7 @@
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="30" maxY="0.0"/>
                                         <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Iniciar sesión con Facebook" image="ic_facebookArtboard 1-1">
+                                        <state key="normal" title="Iniciar sesión con Facebook" image="ic_facebook">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -101,7 +101,7 @@
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="30" maxY="0.0"/>
                                         <inset key="titleEdgeInsets" minX="-2" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Iniciar sesión con Google" image="ic_googleArtboard 1">
+                                        <state key="normal" title="Iniciar sesión con Google" image="ic_google">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -509,7 +509,7 @@
                                     <constraint firstAttribute="height" constant="50" id="iay-PL-Xki"/>
                                 </constraints>
                                 <size key="titleShadowOffset" width="0.0" height="10"/>
-                                <state key="normal" image="ic_saveArtboard 1"/>
+                                <state key="normal" image="ic_save"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="25"/>
@@ -622,7 +622,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_dotsArtboard 1" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Hm-Y7v" userLabel="imgOption">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_dots" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Hm-Y7v" userLabel="imgOption">
                                                     <rect key="frame" x="335" y="8" width="30" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="JbL-wf-2qX"/>
@@ -649,25 +649,25 @@
                                             <outlet property="textTitulo" destination="8wC-qg-kSt" id="K9t-WU-ebi"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="144" id="ZEV-oO-iQF" userLabel="Cell" customClass="CellEquipos" customModule="PokeApp">
-                                        <rect key="frame" x="0.0" y="85.5" width="375" height="144"/>
+                                    <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="110" id="ZEV-oO-iQF" userLabel="Cell" customClass="CellEquipos" customModule="PokeApp">
+                                        <rect key="frame" x="0.0" y="85.5" width="375" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZEV-oO-iQF" id="xbU-fo-pcI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="frh-0g-kcP" userLabel="CollectionList">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QWJ-e9-hor">
                                                         <size key="itemSize" width="110" height="110"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                        <inset key="sectionInset" minX="15" minY="10" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="sectionInset" minX="5" minY="5" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellList" id="bQD-60-2MC" customClass="CellListEquipos" customModule="PokeApp">
-                                                            <rect key="frame" x="15" y="22" width="110" height="110"/>
+                                                            <rect key="frame" x="5" y="2.5" width="110" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
@@ -745,6 +745,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gengar" id="Qji-fL-KwL" userLabel="imgFondo">
+                                <rect key="frame" x="0.0" y="200" width="375" height="467"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -760,6 +764,7 @@
                         <viewLayoutGuide key="safeArea" id="NC6-sG-ACX"/>
                     </view>
                     <connections>
+                        <outlet property="imgFondo" destination="Qji-fL-KwL" id="K9U-D6-iYH"/>
                         <outlet property="listaEquipos" destination="GCI-BY-fL6" id="EcC-tv-21N"/>
                         <outlet property="tituloEquipos" destination="FhR-xY-KZa" id="zsM-QC-G7X"/>
                     </connections>
@@ -768,10 +773,10 @@
             </objects>
             <point key="canvasLocation" x="2464.8000000000002" y="135.38230884557723"/>
         </scene>
-        <!--View Controller Detalle-->
+        <!--Detalle-->
         <scene sceneID="XJ1-kE-adr">
             <objects>
-                <viewController storyboardIdentifier="Detalle" id="iUm-mr-QTz" customClass="ViewControllerDetalle" customModule="PokeApp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Detalle" title="Detalle" id="iUm-mr-QTz" customClass="ViewControllerDetalle" customModule="PokeApp" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qmk-Xv-9gm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -976,23 +981,156 @@
             </objects>
             <point key="canvasLocation" x="1686" y="835"/>
         </scene>
-        <!--View Controller Header-->
+        <!--Opciones-->
         <scene sceneID="rwZ-ah-LSC">
             <objects>
-                <viewController id="IBZ-gU-E0h" customClass="ViewControllerHeader" customModule="PokeApp" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Option" title="Opciones" id="IBZ-gU-E0h" customClass="ViewControllerOption" customModule="PokeApp" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ncs-nj-GI8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ov1-mF-WT1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jpl-MO-8Ct" userLabel="ListaOption">
+                                <rect key="frame" x="0.0" y="437" width="375" height="220"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eWf-bh-p5U">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipT-Kj-0pL" userLabel="Contenedor">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Renombrar Equipo" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nI1-ZD-59K" userLabel="editTeam" customClass="TKFormTextField" customModule="TKFormTextField">
+                                                        <rect key="frame" x="26" y="1" width="237" height="38"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="237" id="Hjy-vv-wuj"/>
+                                                            <constraint firstAttribute="height" constant="38" id="T71-oa-5sZ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQK-2t-JIc" userLabel="btnRenombrar" customClass="LeftAlignedIconButton" customModule="PokeApp">
+                                                        <rect key="frame" x="270" y="2.5" width="90" height="35"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.42312404510000001" blue="0.86371713880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="8GZ-4O-gfl"/>
+                                                            <constraint firstAttribute="width" constant="90" id="hfF-Wi-UfU"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                        <state key="normal" title="Renombrar">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="3"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnRenombrar:" destination="IBZ-gU-E0h" eventType="touchUpInside" id="1eh-sh-jo9"/>
+                                                            <action selector="cerrar:" destination="iUm-mr-QTz" eventType="touchUpInside" id="lgN-Wb-kVz"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opciones:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSa-oA-eh5" userLabel="textOption">
+                                                        <rect key="frame" x="26" y="10" width="81" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="nI1-ZD-59K" firstAttribute="top" secondItem="ipT-Kj-0pL" secondAttribute="top" constant="1" id="4YT-mI-wlF"/>
+                                                    <constraint firstItem="aQK-2t-JIc" firstAttribute="leading" secondItem="nI1-ZD-59K" secondAttribute="trailing" constant="7" id="Eef-aE-IBs"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RSa-oA-eh5" secondAttribute="bottom" constant="9" id="ExM-Ph-33X"/>
+                                                    <constraint firstItem="aQK-2t-JIc" firstAttribute="top" secondItem="ipT-Kj-0pL" secondAttribute="top" constant="2.5" id="Jf8-Tg-Jgf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="aQK-2t-JIc" secondAttribute="trailing" constant="15" id="KFg-qH-nQk"/>
+                                                    <constraint firstAttribute="bottom" secondItem="nI1-ZD-59K" secondAttribute="bottom" constant="1" id="PDf-tm-eVP"/>
+                                                    <constraint firstItem="RSa-oA-eh5" firstAttribute="leading" secondItem="ipT-Kj-0pL" secondAttribute="leading" constant="26" id="SsP-tx-Huc"/>
+                                                    <constraint firstItem="nI1-ZD-59K" firstAttribute="leading" secondItem="ipT-Kj-0pL" secondAttribute="leading" constant="26" id="gbe-6i-dKD"/>
+                                                    <constraint firstItem="RSa-oA-eh5" firstAttribute="top" secondItem="ipT-Kj-0pL" secondAttribute="top" constant="10" id="h4r-GX-da4"/>
+                                                    <constraint firstItem="aQK-2t-JIc" firstAttribute="leading" secondItem="nI1-ZD-59K" secondAttribute="trailing" constant="7" id="qlc-Ki-Mgq"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aQK-2t-JIc" secondAttribute="bottom" constant="2.5" id="qn5-GT-uua"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="0UK-Nm-KQX"/>
+                                            <constraint firstAttribute="height" constant="40" id="dDR-Uy-T5h"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgv-cT-Eg1" userLabel="btnShared">
+                                        <rect key="frame" x="0.0" y="45" width="375" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Compartir equipo pokémon." image="ic_share">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnShared:" destination="IBZ-gU-E0h" eventType="touchUpInside" id="P87-xZ-24E"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABQ-jN-Z7I" userLabel="btnEditName">
+                                        <rect key="frame" x="0.0" y="90" width="375" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Editar nombre de equipo." image="ic_editArtboard 1">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnEditName:" destination="IBZ-gU-E0h" eventType="touchUpInside" id="pV2-B1-lS0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETc-Am-V4v" userLabel="btnEditTeam">
+                                        <rect key="frame" x="0.0" y="135" width="375" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Editar equipo pokémon." image="ic_pokeball">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnEditTeam:" destination="IBZ-gU-E0h" eventType="touchUpInside" id="0jY-AB-x1v"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdP-Tf-oRP" userLabel="btnDelete">
+                                        <rect key="frame" x="0.0" y="180" width="375" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="titleEdgeInsets" minX="45" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Eliminar equipo pokémon." image="ic_delete">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnDelete:" destination="IBZ-gU-E0h" eventType="touchUpInside" id="CEb-sF-ewd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Wgv-cT-Eg1" firstAttribute="leading" secondItem="jpl-MO-8Ct" secondAttribute="leading" id="ECs-IY-3ll"/>
+                                    <constraint firstItem="Wgv-cT-Eg1" firstAttribute="leading" secondItem="jpl-MO-8Ct" secondAttribute="leading" id="Npb-vU-VPP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wgv-cT-Eg1" secondAttribute="trailing" id="WEX-bm-kUk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wgv-cT-Eg1" secondAttribute="trailing" id="r7Y-Qp-lCs"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DGd-nE-a5I" firstAttribute="trailing" secondItem="jpl-MO-8Ct" secondAttribute="trailing" id="9tA-qt-pB9"/>
+                            <constraint firstItem="jpl-MO-8Ct" firstAttribute="leading" secondItem="DGd-nE-a5I" secondAttribute="leading" id="h9g-xW-Pc3"/>
+                            <constraint firstAttribute="bottom" secondItem="jpl-MO-8Ct" secondAttribute="bottom" constant="10" id="vqg-Y6-Snw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="DGd-nE-a5I"/>
                     </view>
+                    <connections>
+                        <outlet property="Contenedor" destination="ipT-Kj-0pL" id="jxm-Qw-BDd"/>
+                        <outlet property="btnRenombrar" destination="aQK-2t-JIc" id="nqd-dT-J5r"/>
+                        <outlet property="editTeam" destination="nI1-ZD-59K" id="ACm-bV-kIb"/>
+                        <outlet property="textOption" destination="RSa-oA-eh5" id="Dr4-T4-Nbi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhL-Gm-Le7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1002,14 +1140,18 @@
     <resources>
         <image name="Background" width="414" height="896"/>
         <image name="back_button1" width="24" height="24"/>
+        <image name="gengar" width="512" height="512"/>
         <image name="ic_acountArtboard 1" width="24" height="24"/>
-        <image name="ic_dotsArtboard 1" width="24" height="24"/>
+        <image name="ic_delete" width="24" height="24"/>
+        <image name="ic_dots" width="24" height="24"/>
         <image name="ic_editArtboard 1" width="24" height="24"/>
-        <image name="ic_facebookArtboard 1-1" width="24" height="24"/>
-        <image name="ic_googleArtboard 1" width="24" height="24"/>
+        <image name="ic_facebook" width="24" height="24"/>
+        <image name="ic_google" width="24" height="24"/>
         <image name="ic_mapsArtboard 1" width="24" height="24"/>
+        <image name="ic_pokeball" width="24" height="24"/>
         <image name="ic_pokeboloasArtboard 1" width="24" height="24"/>
-        <image name="ic_saveArtboard 1" width="24" height="24"/>
+        <image name="ic_save" width="24" height="24"/>
+        <image name="ic_share" width="24" height="24"/>
         <image name="map" width="512" height="512"/>
         <image name="player" width="512" height="512"/>
         <image name="pokeball" width="256" height="256"/>

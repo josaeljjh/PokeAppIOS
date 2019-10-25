@@ -14,7 +14,7 @@ class CellEquipos: UITableViewCell,UICollectionViewDataSource,UICollectionViewDe
     
     @IBOutlet weak var collectionList: UICollectionView!
     var pipeline = ImagePipeline.shared
-    var lista = [ListPokemon]()
+    var lista = [Pokemon]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return lista.count
