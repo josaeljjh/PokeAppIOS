@@ -24,9 +24,9 @@ class ViewModelEquiposPoke{
     }
     
     func getEquipos() {
-        let ref = Database.database().reference(withPath: "Equipos")
+        var ref: DatabaseReference!
+        ref = Database.database().reference().child("User").child(Globales.idUser).child("team")
         ref.observeSingleEvent(of: .value, with: { equipos in
-            
             if equipos.exists() {
                 for child in equipos.children {
                     if let childSnapshot = child as? DataSnapshot,

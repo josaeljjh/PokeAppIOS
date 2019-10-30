@@ -15,4 +15,6 @@ enum Globales{
     static var arrSelectedIndex = [IndexPath]() // This is selected cell Index array
     static var arrSelectedData = [String]() // This is selected cell data array
     static var equipoPokemon = [Pokemon]()
+    static var equipos = [EquipoModel]()
+    static var idUser: String = ""
 }

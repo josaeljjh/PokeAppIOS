@@ -12,6 +12,7 @@ import Nuke
 class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDataSource,UICollectionViewDelegate{
     
     var pipeline = ImagePipeline.shared
+    var numeroString = ""
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.value.count
     }
@@ -20,10 +21,21 @@ class CollectionDataSource : GenericDataSource<PokemonEntry>,UICollectionViewDat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
         
         //obtener imagen pokemon
-        let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        //let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        let urlPoke = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
         var imgPokemon = data.value[indexPath.row].pokemonSpecies.url
         imgPokemon = imgPokemon.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon-species/", with: "")
-        imgPokemon = imgPokemon.replacingOccurrences(of: "/", with: "")+".png"
+        imgPokemon = imgPokemon.replacingOccurrences(of: "/", with: "")
+        
+        let numero = Int(imgPokemon)!
+               if(numero < 10){
+                   numeroString = "00\(numero)"
+               }else if(numero < 100){
+                   numeroString = "0\(numero)"
+               }else{
+                   numeroString = "\(numero)"
+               }
+        imgPokemon = numeroString+".png"
         imgPokemon = urlPoke+imgPokemon
         
         let url = URL(string:imgPokemon)

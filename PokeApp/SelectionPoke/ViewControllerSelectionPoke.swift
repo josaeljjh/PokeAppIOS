@@ -169,7 +169,7 @@ class ViewControllerSelectionPoke: UIViewController{
             ShowHelp(edittEquipo,strings.tituloEquipo,strings.nombreEquipo,60)
         }else{
             var dbRef: DatabaseReference!
-            dbRef = Database.database().reference()
+            dbRef = Database.database().reference().child("User").child(Globales.idUser)
             if !validar {
                 id = dbRef.childByAutoId().key ?? ""
                 msj = "Equipo Agregado"
@@ -183,8 +183,6 @@ class ViewControllerSelectionPoke: UIViewController{
                 arrayPoke.append(pokemon)
             }
             //crear
-            //let id = dbRef.childByAutoId().key ?? ""
-            //let id = Auth.auth().currentUser?.uid
             let equipo = [
                 "idEquipo": id,
                 "nombre": edittEquipo.text! as String,
@@ -193,13 +191,12 @@ class ViewControllerSelectionPoke: UIViewController{
                 "listPokemon": arrayPoke
                 ] as [String : Any]
             
-            dbRef.child("Equipos").child(id).setValue(equipo)
-            //let userID = Auth.auth().currentUser?.uid
-            //dataBaseReference.child("users").child(userID!).setValue(["username": "JosaelH"])
+            dbRef.child("team").child(id).setValue(equipo)
             
             JNBBottombar.shared.show(text: msj)
             starViewController("Equipos")
-            //navigationController?.popToViewController(ofClass: ViewControllerEquiposPokemon.self)
+            self.navigationController?.removeViewController(ViewControllerSelectionPoke.self)
+            
         }
     }
 }

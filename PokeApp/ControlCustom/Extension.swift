@@ -79,7 +79,7 @@ extension UIViewController {
     func SheetDetalle(_ datos:PokemonDetalle,_ indexPath:Int,_ GridCollection:UICollectionView,_ nombreRegion:String) {
         let controller = ViewControllerDetalle.instantiate()
         var sheetController = SheetViewController()
-        sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
+        sheetController = SheetViewController(controller: controller, sizes: [ .fixed(390)])
         // Adjust how the bottom safe area is handled on iPhone X screens
         sheetController.blurBottomSafeArea = false
         sheetController.adjustForBottomSafeArea = true
@@ -106,7 +106,7 @@ extension UIViewController {
     func SheetDetalleEquipo(_ datos:Pokemon) {
         let controller = ViewControllerDetalle.instantiate()
         var sheetController = SheetViewController()
-        sheetController = SheetViewController(controller: controller, sizes: [ .halfScreen])
+        sheetController = SheetViewController(controller: controller, sizes: [ .fixed(390)])
         // Adjust how the bottom safe area is handled on iPhone X screens
         sheetController.blurBottomSafeArea = false
         sheetController.adjustForBottomSafeArea = true
@@ -227,6 +227,11 @@ extension UINavigationController {
     func popToViewController(ofClass: AnyClass, animated: Bool = true) {
         if let vc = viewControllers.last(where: { $0.isKind(of: ofClass) }) {
             popToViewController(vc, animated: animated)
+        }
+    }
+    func removeViewController(_ controller: UIViewController.Type) {
+        if let viewController = viewControllers.first(where: { $0.isKind(of: controller.self) }) {
+            viewController.removeFromParent()
         }
     }
 }
@@ -358,4 +363,5 @@ extension Notification.Name {
     static let didDetalleEquipo = Notification.Name("didDetalleEquipo")
     static let didOption = Notification.Name("didOption")
     static let didUpdate = Notification.Name("didUpdate")
+    static let didReload = Notification.Name("didReload")
 }

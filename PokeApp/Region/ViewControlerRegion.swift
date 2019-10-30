@@ -64,12 +64,14 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
             // second tab bar code
             showToast(message: "2")
             starViewController("Equipos")
+            //self.navigationController?.popToViewController(ofClass: ViewControllerEquiposPokemon.self)
             
         }else if(item.tag == 2) {
             // second tab bar code
             //showToast(message: "3")
             GIDSignIn.sharedInstance()?.signOut()
-            starViewController("Login")
+            //starViewController("Login")
+            navigationController?.popToViewController(ofClass: ViewControllerLoginSocial.self)
         }
     }
     
@@ -89,4 +91,5 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBar.selectedItem = self.tabBar.items![0]
     }
+    
 }

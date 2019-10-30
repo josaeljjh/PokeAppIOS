@@ -45,7 +45,7 @@ class ViewControllerOption: UIViewController{
         super.viewDidLoad()
         
         //Referencia Database
-        dbRef = Database.database().reference()
+        dbRef = Database.database().reference().child("User").child(Globales.idUser)
         
         editTeam.visibility = .invisible
         btnRenombrar.visibility = .invisible
@@ -53,9 +53,9 @@ class ViewControllerOption: UIViewController{
     
     @IBAction func btnShared(_ sender: Any) {
         print("Shared")
-        editTeam.visibility = .invisible
-        btnRenombrar.visibility = .invisible
-        textOption.visibility = .visible
+        let items = [URL(string: "https://www.apple.com")!]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
     }
     
     @IBAction func btnEditName(_ sender: Any) {
@@ -104,13 +104,13 @@ class ViewControllerOption: UIViewController{
     
     func EditarBase(_ id: String,_ nombre: String){
         //Editar nombre
-        dbRef.child("Equipos").child(id).child("nombre").setValue(nombre)
+        dbRef.child("team").child(id).child("nombre").setValue(nombre)
         UpdateData()
     }
     
     func DeleteData(_ id: String){
         //Borrar equipo
-        dbRef.child("Equipos").child(id).removeValue()
+        dbRef.child("team").child(id).removeValue()
         UpdateData()
     }
     

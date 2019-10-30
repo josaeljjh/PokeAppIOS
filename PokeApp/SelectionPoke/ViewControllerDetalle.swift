@@ -27,7 +27,7 @@ class ViewControllerDetalle: UIViewController{
     var imgUrl:String!
     var pipeline = ImagePipeline.shared
     var valid = true
-    
+    var numeroString = ""
     var sheetControllerDetalle: SheetViewController = SheetViewController()
     var datos = [PokemonDetalle]()
     var equipo = [Pokemon]()
@@ -49,8 +49,17 @@ class ViewControllerDetalle: UIViewController{
             numero.text = "\(datos[0].id)"
             
             //obtener imagen pokemon
-            let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-            imgUrl = "\(datos[0].id)"
+            //let urlPoke = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+            let urlPoke = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/"
+            let numero = datos[0].id
+            if(numero < 10){
+                numeroString = "00\(numero)"
+            }else if(numero < 100){
+                numeroString = "0\(numero)"
+            }else{
+                numeroString = "\(numero)"
+            }
+            imgUrl = numeroString
             //img = img.replacingOccurrences(of: "https://pokeapi.co/api/v2/pokemon-species/", with: "")
             imgUrl = imgUrl.replacingOccurrences(of: "/", with: "")+".png"
             imgUrl = urlPoke+imgUrl
@@ -97,7 +106,7 @@ class ViewControllerDetalle: UIViewController{
         NotificationCenter.default.post(name: .didBtnSave, object: nil)
         let equipo = Pokemon(
             id: "\(position)",
-            numero: "\(datos[0].id)",
+            numero: numeroString,
             nombre: datos[0].name.capitalized,
             imagen: imgUrl,
             tipo: datos[0].eggGroups[0].name.capitalized,

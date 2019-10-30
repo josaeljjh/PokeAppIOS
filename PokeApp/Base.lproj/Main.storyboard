@@ -87,7 +87,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="wdV-Sx-3hc" kind="show" id="PVo-5m-21H"/>
+                                            <action selector="btnFaceBook:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YDh-mS-JIA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gT-Ft-SKe" customClass="LeftAlignedIconButton" customModule="PokeApp">
@@ -781,15 +781,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeballs" translatesAutoresizingMaskIntoConstraints="NO" id="Tfb-cv-ibQ" userLabel="imgPokemon">
-                                <rect key="frame" x="137" y="342" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="dvU-vX-wha"/>
-                                    <constraint firstAttribute="height" constant="100" id="jTs-yh-8qh"/>
-                                </constraints>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ui2-6o-Rvn" customClass="CardView" customModule="PokeApp">
-                                <rect key="frame" x="25" y="457" width="325" height="125"/>
+                                <rect key="frame" x="25" y="462" width="325" height="125"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LOx-w0-NrV" userLabel="Contenedor">
                                         <rect key="frame" x="10" y="10" width="305" height="105"/>
@@ -921,7 +914,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zb-tp-KvI" userLabel="btnCerrar" customClass="LeftAlignedIconButton" customModule="PokeApp">
-                                <rect key="frame" x="280" y="602" width="70" height="35"/>
+                                <rect key="frame" x="280" y="607" width="70" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.42312404510000001" blue="0.86371713880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="bq4-hs-49O"/>
@@ -952,19 +945,26 @@
                                     <action selector="agregar:" destination="iUm-mr-QTz" eventType="touchUpInside" id="T91-o7-AHB"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokeballs" translatesAutoresizingMaskIntoConstraints="NO" id="Tfb-cv-ibQ" userLabel="imgPokemon">
+                                <rect key="frame" x="112" y="302" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="gic-nP-5ct"/>
+                                    <constraint firstAttribute="width" constant="150" id="xJ8-Im-Yrv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="TDe-iN-B51" firstAttribute="trailing" secondItem="Tfb-cv-ibQ" secondAttribute="trailing" constant="138" id="2KH-cW-wxK"/>
                             <constraint firstItem="2Zb-tp-KvI" firstAttribute="leading" secondItem="dlA-LO-unF" secondAttribute="trailing" constant="13" id="3D0-ob-kuG"/>
-                            <constraint firstItem="Tfb-cv-ibQ" firstAttribute="leading" secondItem="TDe-iN-B51" secondAttribute="leading" constant="137" id="92s-O2-fNT"/>
                             <constraint firstItem="TDe-iN-B51" firstAttribute="trailing" secondItem="2Zb-tp-KvI" secondAttribute="trailing" constant="25" id="Atj-5s-RXS"/>
                             <constraint firstItem="TDe-iN-B51" firstAttribute="trailing" secondItem="Ui2-6o-Rvn" secondAttribute="trailing" constant="25" id="Bq7-aK-ldy"/>
                             <constraint firstItem="2Zb-tp-KvI" firstAttribute="top" secondItem="Ui2-6o-Rvn" secondAttribute="bottom" constant="20" id="FCf-mn-e0L"/>
+                            <constraint firstItem="Ui2-6o-Rvn" firstAttribute="top" secondItem="Tfb-cv-ibQ" secondAttribute="bottom" constant="10" id="S2I-FA-e7P"/>
+                            <constraint firstItem="TDe-iN-B51" firstAttribute="trailing" secondItem="Tfb-cv-ibQ" secondAttribute="trailing" constant="113" id="VmU-O6-LC5"/>
                             <constraint firstAttribute="bottom" secondItem="dlA-LO-unF" secondAttribute="bottom" constant="30" id="Yi1-iz-nSE"/>
                             <constraint firstItem="Ui2-6o-Rvn" firstAttribute="leading" secondItem="TDe-iN-B51" secondAttribute="leading" constant="25" id="iIl-0T-rN5"/>
-                            <constraint firstItem="Ui2-6o-Rvn" firstAttribute="top" secondItem="Tfb-cv-ibQ" secondAttribute="bottom" constant="15" id="l5f-5L-Gqm"/>
-                            <constraint firstAttribute="bottom" secondItem="2Zb-tp-KvI" secondAttribute="bottom" constant="30" id="w8f-eK-B4V"/>
+                            <constraint firstItem="Tfb-cv-ibQ" firstAttribute="leading" secondItem="TDe-iN-B51" secondAttribute="leading" constant="112" id="qAJ-rm-nlt"/>
+                            <constraint firstAttribute="bottom" secondItem="2Zb-tp-KvI" secondAttribute="bottom" constant="25" id="w8f-eK-B4V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TDe-iN-B51"/>
                     </view>

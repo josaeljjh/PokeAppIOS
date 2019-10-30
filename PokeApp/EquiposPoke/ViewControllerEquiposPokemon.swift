@@ -15,7 +15,7 @@ class ViewControllerEquiposPokemon: UIViewController{
     @IBOutlet weak var imgFondo: UIImageView!
     @IBOutlet weak var listaEquipos: UITableView!
     @IBOutlet weak var tituloEquipos: UILabel!
-    let dataSource = DataSourceEquipos()
+    var dataSource = DataSourceEquipos()
     var spinner : JHSpinnerView!
     lazy var viewModel : ViewModelEquiposPoke = {
         let viewModel = ViewModelEquiposPoke(dataSource: dataSource)
@@ -42,6 +42,7 @@ class ViewControllerEquiposPokemon: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(onOption(_:)), name: .didOption, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdate(_:)), name: .didUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveError(_:)), name: .didReceiveError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onReload(_:)), name: .didReload, object: nil)
     }
     
     @objc func onDidDetalleEquipo(_ notification:Notification) {
@@ -61,6 +62,7 @@ class ViewControllerEquiposPokemon: UIViewController{
         if let data = notification.object as? EquipoModel
         {
             SheetOption(data,listaEquipos)
+            self.navigationController?.removeViewController(ViewControllerOption.self)
         }
         NotificationCenter.default.removeObserver(onOption)
         
@@ -77,6 +79,8 @@ class ViewControllerEquiposPokemon: UIViewController{
             selectionPoke.validar = true
             selectionPoke.mEquipoModel = [data]
             self.navigationController?.pushViewController(selectionPoke, animated: true)
+            self.navigationController?.removeViewController(ViewControllerEquiposPokemon.self)
+            
         }
         NotificationCenter.default.removeObserver(onUpdate)
     }
@@ -86,9 +90,9 @@ class ViewControllerEquiposPokemon: UIViewController{
     
     @IBAction func btnAtras(_ sender: Any) {
         //self.navigationController?.popViewController(animated: true)
-        //self.navigationController?.popToRootViewController(animated: true)
         //InicialViewController("Region")
         navigationController?.popToViewController(ofClass: ViewControllerRegion.self)
+        
     }
     
     @objc func onDidReceiveError(_ notification:Notification) {
@@ -113,7 +117,11 @@ class ViewControllerEquiposPokemon: UIViewController{
         self.viewModel.getEquipos()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
+    override func viewWillAppear(_ animated: Bool) {
+       //UpdateData()
     }
+    
+    @objc func onReload(_ notification:Notification) {
+     
+     }
 }
