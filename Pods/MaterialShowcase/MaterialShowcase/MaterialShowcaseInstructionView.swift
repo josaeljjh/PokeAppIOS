@@ -20,7 +20,8 @@ public class MaterialShowcaseInstructionView: UIView {
   
   public var primaryLabel: UILabel!
   public var secondaryLabel: UILabel!
-  
+  public var button:UIButton!
+    
   // Text
   public var primaryText: String!
   public var secondaryText: String!
@@ -63,7 +64,7 @@ public class MaterialShowcaseInstructionView: UIView {
   /// Configures and adds primary label view
   private func addPrimaryLabel() {
     if primaryLabel != nil {
-        primaryLabel.removeFromSuperview()
+      primaryLabel.removeFromSuperview()
     }
     
     primaryLabel = UILabel()
@@ -89,7 +90,7 @@ public class MaterialShowcaseInstructionView: UIView {
   /// Configures and adds secondary label view
   private func addSecondaryLabel() {
     if secondaryLabel != nil {
-        secondaryLabel.removeFromSuperview()
+      secondaryLabel.removeFromSuperview()
     }
     
     secondaryLabel = UILabel()
@@ -113,25 +114,41 @@ public class MaterialShowcaseInstructionView: UIView {
     frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: primaryLabel.frame.height + secondaryLabel.frame.height)
   }
   
-  //Calculate width per device
-  private func getWidth() -> CGFloat{
-    //superview was left side
-    if (self.superview?.frame.origin.x)! < CGFloat(0) {
-        return frame.width - (frame.minX/2)
-    } else if ((self.superview?.frame.origin.x)! + (self.superview?.frame.size.width)! >
-        UIScreen.main.bounds.width) { //superview was right side
-        return (frame.width - frame.minX)/2
-    }
-    return (frame.width - frame.minX)
+   /// Configures and add Button view
+      private func addButton() {
+          if button != nil {
+              button.removeFromSuperview()
+          }
+       
+          button = UIButton(frame: CGRect(x: 0, y: 100, width: 100, height: 50))
+          button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+          button.titleLabel?.textColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+          button.setTitle("Aceptar", for: .normal)
+          button.layer.cornerRadius = 5
+          button.layer.borderWidth = 1
+          button.layer.borderColor = UIColor.black.cgColor
+          addSubview(button)
+      }
+      
+      //Calculate width per device
+      private func getWidth() -> CGFloat{
+          //superview was left side
+          if (self.superview?.frame.origin.x)! < CGFloat(0) {
+              return frame.width - (frame.minX/2)
+          } else if ((self.superview?.frame.origin.x)! + (self.superview?.frame.size.width)! >
+              UIScreen.main.bounds.width) { //superview was right side
+              return (frame.width - frame.minX)/2
+          }
+          return (frame.width - frame.minX)
+      }
+      
+      /// Overrides this to add subviews. They will be drawn when calling show()
+      public override func layoutSubviews() {
+          super.layoutSubviews()
+          
+          addPrimaryLabel()
+          addSecondaryLabel()
+          //addButton()
+          subviews.forEach({$0.isUserInteractionEnabled = false})
+      }
   }
-    
-  /// Overrides this to add subviews. They will be drawn when calling show()
-  public override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    addPrimaryLabel()
-    addSecondaryLabel()
-    
-    subviews.forEach({$0.isUserInteractionEnabled = false})
-  }
-}

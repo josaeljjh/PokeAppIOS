@@ -88,9 +88,9 @@ extension UIViewController {
         // Make corners more round
         sheetController.topCornersRadius = 15
         // Disable the dismiss on background tap functionality
-        sheetController.dismissOnBackgroundTap = false
+        sheetController.dismissOnBackgroundTap = true
         // Extend the background behind the pull bar instead of having it transparent
-        sheetController.extendBackgroundBehindHandle = true
+        sheetController.extendBackgroundBehindHandle = false
         // Change the overlay color
         //sheetController.overlayColor = UIColor.red
         // Change the handle color

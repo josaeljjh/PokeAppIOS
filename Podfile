@@ -9,6 +9,9 @@ target 'PokeApp' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Analytics'
+  pod 'FacebookCore', "~> 0.9.0"
+  pod 'FacebookLogin', "~> 0.9.0"
+  pod 'FacebookShare', "~> 0.9.0"
   pod 'Nuke'
   pod 'Alamofire'
   pod 'FittedSheets'

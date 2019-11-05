@@ -117,4 +117,5 @@ class ViewControllerDetalle: UIViewController{
         // self.equipoPokemon.append(   id: "\(datos[0].id)",nombre: datos[0].name.capitalized,listPokemon:pokemon)
     }
     
+    
 }

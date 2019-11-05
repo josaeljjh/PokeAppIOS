@@ -14,14 +14,13 @@ import UIKit
 
 public class MaterialShowcase: UIView {
   
-  
   @objc public enum BackgroundTypeStyle: Int {
     case circle //default
     case full//full screen
   }
   
   // MARK: Material design guideline constant
-  let BACKGROUND_ALPHA: CGFloat = 0.96
+  let BACKGROUND_PROMPT_ALPHA: CGFloat = 0.96
   let TARGET_HOLDER_RADIUS: CGFloat = 44
   let TEXT_CENTER_OFFSET: CGFloat = 44 + 20
   let INSTRUCTIONS_CENTER_OFFSET: CGFloat = 20
@@ -52,14 +51,17 @@ public class MaterialShowcase: UIView {
   var targetRippleView: UIView!
   var targetCopyView: UIView!
   var instructionView: MaterialShowcaseInstructionView!
-
+  
+  var onTapThrough: (() -> Void)?
   
   // MARK: Public Properties
   
   // Background
+  @objc public var backgroundAlpha: CGFloat = 1.0
   @objc public var backgroundPromptColor: UIColor!
   @objc public var backgroundPromptColorAlpha: CGFloat = 0.0
   @objc public var backgroundViewType: BackgroundTypeStyle = .circle
+  @objc public var backgroundRadius: CGFloat = -1.0 // If the value is negative, calculate the radius automatically
   // Tap zone settings
   // - false: recognize tap from all displayed showcase.
   // - true: recognize tap for targetView area only.
@@ -88,8 +90,6 @@ public class MaterialShowcase: UIView {
   @objc public var aniRippleAlpha: CGFloat = 0.0
   // Delegate
   @objc public weak var delegate: MaterialShowcaseDelegate?
-  
-
   
   public init() {
     // Create frame
@@ -125,19 +125,36 @@ extension MaterialShowcase {
   }
   
   /// Sets a UIBarButtonItem as target
-  @objc public func setTargetView(barButtonItem: UIBarButtonItem) {
+  @objc public func setTargetView(button: UIButton, tapThrough: Bool = false) {
+    targetView = button
+    let tintColor = button.titleColor(for: .normal)
+    targetTintColor = tintColor
+    backgroundPromptColor = tintColor
+    if tapThrough {
+      onTapThrough = { button.sendActions(for: .touchUpInside)  }
+    }
+  }
+  
+  /// Sets a UIBarButtonItem as target
+  @objc public func setTargetView(barButtonItem: UIBarButtonItem, tapThrough: Bool = false) {
     if let view = (barButtonItem.value(forKey: "view") as? UIView)?.subviews.first {
       targetView = view
+      if tapThrough {
+        onTapThrough = { _ = barButtonItem.target?.perform(barButtonItem.action, with: nil) }
+      }
     }
   }
   
   /// Sets a UITabBar Item as target
-  @objc public func setTargetView(tabBar: UITabBar, itemIndex: Int) {
+  @objc public func setTargetView(tabBar: UITabBar, itemIndex: Int, tapThrough: Bool = false) {
     let tabBarItems = orderedTabBarItemViews(of: tabBar)
     if itemIndex < tabBarItems.count {
       targetView = tabBarItems[itemIndex]
       targetTintColor = tabBar.tintColor
       backgroundPromptColor = tabBar.tintColor
+      if tapThrough {
+        onTapThrough = { tabBar.selectedItem = tabBar.items?[itemIndex] }
+      }
     } else {
       print ("The tab bar item index is out of range")
     }
@@ -157,33 +174,31 @@ extension MaterialShowcase {
     initViews()
     alpha = 0.0
     containerView.addSubview(self)
-    self.layoutIfNeeded()
+    layoutIfNeeded()
     
     let scale = TARGET_HOLDER_RADIUS / (backgroundView.frame.width / 2)
     let center = backgroundView.center
     
     backgroundView.transform = CGAffineTransform(scaleX: scale, y: scale) // Initial set to support animation
-    self.backgroundView.center = self.targetHolderView.center
+    backgroundView.center = targetHolderView.center
     if animated {
       UIView.animate(withDuration: aniComeInDuration, animations: {
         self.targetHolderView.transform = CGAffineTransform(scaleX: 1, y: 1)
         self.backgroundView.transform = CGAffineTransform(scaleX: 1, y: 1)
         self.backgroundView.center = center
-        self.alpha = 1.0
+        self.alpha = self.backgroundAlpha
       }, completion: { _ in
         self.startAnimations()
       })
     } else {
-      self.alpha = 1.0
+      alpha = backgroundAlpha
     }
     // Handler user's action after showing.
     if let handler = handler {
       handler()
     }
   }
-
- 
-
+  
 }
 
 // MARK: - Utility API
@@ -216,7 +231,7 @@ extension MaterialShowcase {
   func setDefaultProperties() {
     // Background
     backgroundPromptColor = BACKGROUND_DEFAULT_COLOR
-    backgroundPromptColorAlpha = BACKGROUND_ALPHA
+    backgroundPromptColorAlpha = BACKGROUND_PROMPT_ALPHA
     // Target view
     targetTintColor = BACKGROUND_DEFAULT_COLOR
     targetHolderColor = TARGET_HOLDER_COLOR
@@ -297,17 +312,17 @@ extension MaterialShowcase {
   private func addBackground() {
     switch self.backgroundViewType {
     case .circle:
-      let radius: CGFloat!
+      let radius: CGFloat
       
-      let center = targetRippleView.center//getOuterCircleCenterPoint(for: targetCopyView)
-      
-      if UIDevice.current.userInterfaceIdiom == .pad {
-        radius = 300.0
+      if backgroundRadius < 0 {
+        radius = getDefaultBackgroundRadius()
       } else {
-        radius = getOuterCircleRadius(center: center, textBounds: instructionView.frame, targetBounds: targetRippleView.frame)
+        radius = backgroundRadius
       }
       
-      backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: radius * 2,height: radius * 2))
+      let center = targetRippleView.center
+      
+      backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: radius * 2.3,height: radius * 2.3))
       backgroundView.center = center
       
       backgroundView.asCircle()
@@ -317,6 +332,16 @@ extension MaterialShowcase {
     backgroundView.backgroundColor = backgroundPromptColor.withAlphaComponent(backgroundPromptColorAlpha)
     insertSubview(backgroundView, belowSubview: targetRippleView)
     addBackgroundMask(with: targetHolderRadius, in: backgroundView)
+  }
+  
+  private func getDefaultBackgroundRadius() -> CGFloat{
+    var radius: CGFloat = 0.0
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      radius = 300.0
+    } else {
+      radius = getOuterCircleRadius(center: center, textBounds: instructionView.frame, targetBounds: targetRippleView.frame)
+    }
+    return radius
   }
   
   private func addBackgroundMask(with radius: CGFloat, in view: UIView) {
@@ -438,9 +463,7 @@ extension MaterialShowcase {
       }
     } else {
       if getTargetPosition(target: targetView, container: containerView) == .above {
-        
-        yPosition = center.y + TARGET_PADDING +  (targetView.bounds.height / 2 > self.targetHolderRadius ? targetView.bounds.height / 2 : self.targetHolderRadius)
-        
+        yPosition = center.y + TARGET_PADDING +  (targetView.bounds.height / 2 > targetHolderRadius ? targetView.bounds.height / 2 : targetHolderRadius)
       } else {
         yPosition = center.y - TEXT_CENTER_OFFSET - LABEL_DEFAULT_HEIGHT * 2
       }
@@ -503,7 +526,10 @@ extension MaterialShowcase {
     if delegate != nil && delegate?.showCaseDidDismiss != nil {
       delegate?.showCaseDidDismiss?(showcase: self, didTapTarget: didTapTarget)
     }
-
+    
+    if didTapTarget {
+      onTapThrough?()
+    }
   }
   
   private func recycleSubviews() {

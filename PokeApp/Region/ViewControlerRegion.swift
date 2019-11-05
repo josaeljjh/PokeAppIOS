@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import GoogleSignIn
+import FirebaseAuth
 
 
 class ViewControllerRegion: UIViewController,UITabBarDelegate{
@@ -69,7 +70,19 @@ class ViewControllerRegion: UIViewController,UITabBarDelegate{
         }else if(item.tag == 2) {
             // second tab bar code
             //showToast(message: "3")
-            GIDSignIn.sharedInstance()?.signOut()
+            if GIDSignIn.sharedInstance()?.currentUser != nil{
+                GIDSignIn.sharedInstance()?.signOut()
+            }else{
+                let firebaseAuth = Auth.auth()
+                do {
+                    try firebaseAuth.signOut()
+                } catch let signOutError as NSError {
+                    print ("Error signing out: \(signOutError)")
+                }
+            }
+            
+            
+            
             //starViewController("Login")
             navigationController?.popToViewController(ofClass: ViewControllerLoginSocial.self)
         }
